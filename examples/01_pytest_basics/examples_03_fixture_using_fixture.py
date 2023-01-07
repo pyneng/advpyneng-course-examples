@@ -39,4 +39,4 @@ def test_send_show_command(r1_test_connection):
     correct_output = r1_test_connection.send_command(cmd)
     assert output == correct_output
 
-
+# pytest examples_03_fixture_using_fixture.py -v --setup-show --no-header
