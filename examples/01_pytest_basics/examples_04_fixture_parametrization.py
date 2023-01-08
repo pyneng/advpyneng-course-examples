@@ -19,3 +19,15 @@ def test_check_ip_wrong(ip_address):
         check_ip(ip_address) == False
     ), "При неправильном IP, функция должна возвращать False"
 
+
+@pytest.fixture
+def ip_correct():
+    return "10.1.1.1"
+
+
+def test_check_ip_correct_2(ip_correct):
+    assert (
+        check_ip(ip_correct) == True
+    ), "При правильном IP, функция должна возвращать True"
+
+
