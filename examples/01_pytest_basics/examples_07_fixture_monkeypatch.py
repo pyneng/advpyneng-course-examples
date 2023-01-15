@@ -23,5 +23,6 @@ def prompt_password(username, password=None, **kwargs):
 
 def test_prompt_password_input(monkeypatch):
     # monkeypatch.setattr('builtins.input', lambda prompt=None: '123456789')
-    monkeypatch.setattr(getpass, "getpass", lambda x=None: '123456789')
+    monkeypatch.setattr("getpass.getpass", lambda x=None: '123456789')
+    # monkeypatch.setattr(getpass, "getpass", lambda x=None: '123456789')
     assert prompt_password("user1", None) == True
