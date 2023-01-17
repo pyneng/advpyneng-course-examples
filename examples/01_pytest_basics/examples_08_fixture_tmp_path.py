@@ -11,32 +11,31 @@ def generate_access_config(intf_vlan_dict, access_template, output_cfg):
                 f.write(f"{command}\n")
 
 
-#access_dict = {"FastEthernet0/12": 10, "FastEthernet0/14": 11}
-#cmd_list = ["switchport mode access", "switchport access vlan"]
-#generate_access_config(access_dict, cmd_list, "output1.txt")
-
-access_dict = {
-    "FastEthernet0/3": 100,
-    "FastEthernet0/7": 101,
-    "FastEthernet0/10": 111,
-}
-
-cmd_list = [
-    "switchport mode access",
-    "spanning-tree portfast",
-    "spanning-tree bpduguard enable",
-]
-
-# generate_access_config(access_dict, cmd_list, "output2.txt")
-
-def test_create_file(tmp_path):
-    output_filename = tmp_path / "output.txt"
-    generate_access_config(access_dict, cmd_list, output_filename)
+def test_generate_access_config_1(tmp_path):
+    filename = tmp_path / "output.txt"
+    access_dict = {"FastEthernet0/12": 10, "FastEthernet0/14": 11}
+    cmd_list = ["switchport mode access", "switchport access vlan"]
     correct_output = (
-        "interface FastEthernet0/3\n"
+        "interface FastEthernet0/12\n"
         "switchport mode access\n"
-        "spanning-tree portfast\n"
-        "spanning-tree bpduguard enable\n"
+        "switchport access vlan 10\n"
+        "interface FastEthernet0/14\n"
+        "switchport mode access\n"
+        "switchport access vlan 11\n"
+    )
+    generate_access_config(access_dict, cmd_list, filename)
+    assert filename.read_text() == correct_output
+
+
+def test_generate_access_config_2(tmp_path):
+    filename = tmp_path / "output.txt"
+    access_dict = {"FastEthernet0/7": 101, "FastEthernet0/10": 111}
+    cmd_list = [
+        "switchport mode access",
+        "spanning-tree portfast",
+        "spanning-tree bpduguard enable",
+    ]
+    correct_output = (
         "interface FastEthernet0/7\n"
         "switchport mode access\n"
         "spanning-tree portfast\n"
@@ -46,4 +45,5 @@ def test_create_file(tmp_path):
         "spanning-tree portfast\n"
         "spanning-tree bpduguard enable\n"
     )
-    assert output_filename.read_text() == correct_output
+    generate_access_config(access_dict, cmd_list, filename)
+    assert filename.read_text() == correct_output
