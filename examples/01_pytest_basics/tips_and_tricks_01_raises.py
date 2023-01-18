@@ -5,7 +5,7 @@ import pytest
 def check_ip(ip):
     if type(ip) != str:
         # return True
-        raise ValueError(f"'{ip}' does not appear to be an IP address")
+        raise TypeError("Function only works with strings")
     try:
         ipaddress.ip_address(ip)
         return True
@@ -27,18 +27,31 @@ def test_check_ip_wrong(ip_address):
     ), "При неправильном IP, функция должна возвращать False"
 
 
-def test_check_ip_wrong_1():
-    with pytest.raises((ValueError, TypeError)):
+def test_check_ip_raises_0(): # bad
+    try:
+        check_ip(100)
+    except TypeError:
+        assert True
+    else:
+        pytest.fail("Должно было сгенерироваться исключение")
+
+
+def test_check_ip_raises_1():
+    with pytest.raises(TypeError):
         check_ip(100)
 
 
-def test_check_ip_wrong_2():
-    with pytest.raises(ValueError) as error:
-        check_ip(1000)
-    assert "does not appear to be an IP address" in str(error.value)
+def test_check_ip_raises_2():
+    with pytest.raises((TypeError, ValueError)):
+        check_ip(100)
 
 
-def test_check_ip_wrong_3():
-    with pytest.raises(ValueError, match="does not appear .+ IP address") as error:
-        check_ip(1000)
+def test_check_ip_raises_3():
+    with pytest.raises(TypeError) as error:
+        check_ip(100)
+    assert "strings" in str(error.value)
 
+
+def test_check_ip_raises_4():
+    with pytest.raises(TypeError, match="st.+ngs"):
+        check_ip(100)
