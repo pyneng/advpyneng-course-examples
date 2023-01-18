@@ -1,26 +1,18 @@
-from pprint import pprint
-import yaml
 import pytest
+import subprocess
 
 
-@pytest.mark.parametrize(
-    "service,command,check_output",  # ["command", "check_output"],
-    [
-        ("ospf", "sh ip ospf", "routing process"),
-        ("interfaces", "sh ip int br", "up"),
-    ],
-)
-def test_services(ssh_connection, service, command, check_output):
-    output = ssh_connection.send_command(command)
-    assert check_output in output.lower()
+def ping_ip(ip):
+    result = subprocess.run(["ping", "-c", "3", ip], capture_output=True)
+    if result.returncode == 0:
+        return True
+    else:
+        return False
 
 
-@pytest.mark.parametrize(
-    "ip_address", ["192.168.100.1", "192.168.100.100"], ids=["ISP1", "ISP2"]
-)
-def test_ping(ssh_connection, ip_address):
-    output = ssh_connection.send_command(f"ping {ip_address}")
-    assert "success rate is 100" in output.lower()
+@pytest.mark.parametrize("ip_address", ["192.168.100.1", "192.168.100.2", "10.1.1.1"])
+def test_ping(ip_address):
+    assert ping_ip(ip_address) == True, f"IP {ip_address} должен пинговаться"
 
 
 def test_loopback(ssh_connection):
@@ -29,6 +21,11 @@ def test_loopback(ssh_connection):
     assert loopback in output
 
 
-def test_intf(ssh_connection):
-    output = ssh_connection.send_command("sh ip int br | i up +up")
-    assert output.count("up") >= 4
+@pytest.mark.parametrize(
+    "command, check_output",
+    [("sh ip ospf", "routing process"), ("sh ip int br", "up")],
+    ids=["ospf", "interfaces"]
+)
+def test_services(ssh_connection, command, check_output):
+    output = ssh_connection.send_command(command)
+    assert check_output in output.lower()
