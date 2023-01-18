@@ -4,6 +4,7 @@ import pytest
 
 def check_ip(ip):
     if type(ip) != str:
+        # return True
         raise ValueError(f"'{ip}' does not appear to be an IP address")
     try:
         ipaddress.ip_address(ip)
@@ -26,7 +27,18 @@ def test_check_ip_wrong(ip_address):
     ), "При неправильном IP, функция должна возвращать False"
 
 
-@pytest.mark.parametrize("ip_address", [100])
-def test_check_ip_wrong(ip_address):
-    with pytest.raises(ValueError):
-        check_ip(ip_address)
+def test_check_ip_wrong_1():
+    with pytest.raises((ValueError, TypeError)):
+        check_ip(100)
+
+
+def test_check_ip_wrong_2():
+    with pytest.raises(ValueError) as error:
+        check_ip(1000)
+    assert "does not appear to be an IP address" in str(error.value)
+
+
+def test_check_ip_wrong_3():
+    with pytest.raises(ValueError, match="does not appear .+ IP address") as error:
+        check_ip(1000)
+
