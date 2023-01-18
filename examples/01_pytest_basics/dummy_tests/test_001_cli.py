@@ -7,11 +7,15 @@ def test_func_1(fixture_1_tuple):
 
 @pytest.mark.parametrize("ip", ["10.1.1.1", "10.2.2.2", "10.1.1.3"])
 def test_ping_ip_success(ip):
+    print("#" * 40)
     assert ip
 
 
 @pytest.mark.parametrize("ip", ["10.1.1.1", "10.2.2.2", "10.1.1.3"])
 def test_ping_ip_failed(ip):
+    data = "TEXT"
+    vlans = [1, 2, 3]
+    print(">" * 40)
     assert ip == "8.8.8.8"
 
 
