@@ -29,16 +29,16 @@ class IPAddress:
         return (int(self), self.mask) <= (int(second_ip), second_ip.mask)
 
     def __eq__(self, second_ip):
+        # print("eq", self, second_ip)
         if type(second_ip) != IPAddress:
             raise TypeError(f"'==' not supported between instances of 'IPAddress'"
                             f" and '{type(second_ip).__name__}'")
         return (int(self), self.mask) == (int(second_ip), second_ip.mask)
 
 
-if __name__ == "__main__":
-    ip1 = IPAddress("10.1.1.1", 25)
-    ip2 = IPAddress("10.2.2.2", 25)
-    ip3 = IPAddress("10.1.1.1", 25)
-    ip4 = IPAddress("10.10.1.1", 25)
-    ip5 = IPAddress("10.1.1.1", 29)
+ip1 = IPAddress("10.1.1.1", 25)
+ip2 = IPAddress("10.2.2.2", 25)
+ip3 = IPAddress("10.1.1.1", 25)
+ip4 = IPAddress("10.10.1.1", 25)
+ip5 = IPAddress("10.1.1.1", 29)
 
