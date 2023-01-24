@@ -1,47 +1,112 @@
-import ipaddress
-from typing_extensions import Self
+from pprint import pprint
+import re
+import time
+import paramiko
 
 
-class IPAddress:
-    def __init__(self, ip: str, mask: int):
-        self.ip = ip
-        self.mask = mask
+class CiscoSSH:
+    def __init__(
+        self,
+        host,
+        username,
+        password,
+        secret=None,
+        pause=0.2,
+        max_read=100000,
+        read_timeout=2,
+    ):
+        self.host = host
+        self.pause = pause
+        self.max_read = max_read
+        self.read_timeout = read_timeout
 
-    def __int__(self) -> int:
-        int_ip = int(ipaddress.ip_address(self.ip))
-        return int_ip
+        client = paramiko.SSHClient()
+        client.load_system_host_keys()
+        client.connect(
+            hostname=host,
+            username=username,
+            password=password,
+            look_for_keys=False,
+            allow_agent=False,
+        )
+        self._ssh = client.invoke_shell()
+        self.prompt = self.get_prompt()
+        self._send_command("terminal length 0")
+        self._read_until("[>#]")
+        if secret and "#" not in self.prompt:
+            self._send_command("enable")
+            self._read_until("Password")
+            self._send_command(secret)
+            self._read_until("#")
+            self.prompt = self.get_prompt()
 
-    def __str__(self) -> str:
-        return f"{self.ip}/{self.mask}"
+    def get_prompt(self):
+        self._send_command("sh clock")
+        time.sleep(self.pause)
+        output = self._read_until("[#>]")
+        match = re.search(r"\S+[>#]", output)
+        if match:
+            return match.group()
+        else:
+            raise ValueError("Couldn't find a prompt")
 
-    def __repr__(self) -> str:
-        return f"IPAddress('{self.ip}', {self.mask})"
+    def _send_command(self, command):
+        self._ssh.send(f"{command}\n")
 
-    def __lt__(self, second_ip: IPAddress) -> bool:
-        if type(second_ip) != IPAddress:
-            raise TypeError(f"'<' not supported between instances of 'IPAddress'"
-                            f" and '{type(second_ip).__name__}'")
-        return (int(self), self.mask) < (int(second_ip), second_ip.mask)
+    def _read_until_prompt(self):
+        output = self._read_until(self.prompt)
+        return output
 
-    def __le__(self, second_ip):
-        if type(second_ip) != IPAddress:
-            raise TypeError(f"'<=' not supported between instances of 'IPAddress'"
-                            f" and '{type(second_ip).__name__}'")
-        return (int(self), self.mask) <= (int(second_ip), second_ip.mask)
+    def _read_until(self, regex):
+        self._ssh.settimeout(self.read_timeout)
+        output = ""
+        while True:
+            time.sleep(self.pause)
+            try:
+                part = self._ssh.recv(self.max_read).decode("utf-8")
+                output += part
+            except OSError:
+                break
+            match = re.search(regex, output)
+            if match:
+                break
+        return output
 
-    def __eq__(self, second_ip):
-        # print("eq", self, second_ip)
-        if type(second_ip) != IPAddress:
-            raise TypeError(f"'==' not supported between instances of 'IPAddress'"
-                            f" and '{type(second_ip).__name__}'")
-        return (int(self), self.mask) == (int(second_ip), second_ip.mask)
+    def send_show_command(self, show_command):
+        self._send_command(show_command)
+        output = self._read_until_prompt()
+        return output
+
+    def send_config_commands(self, commands):
+        if type(commands) == str:
+            commands = ["conf t", commands, "end"]
+        else:
+            commands = ["conf t", *commands, "end"]
+        output = ""
+        for cmd in commands:
+            self._send_command(cmd)
+            time.sleep(self.pause)
+        output += self._read_until_prompt()
+        return output
+
+    def close(self):
+        self._ssh.close()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.close()
 
 
 if __name__ == "__main__":
-    ip1 = IPAddress("10.1.1.1", 25)
-    ip2 = IPAddress("10.2.2.2", 25)
-    ip3 = IPAddress("10.1.1.1", 25)
-    ip4 = IPAddress("10.10.1.1", 25)
-    ip5 = IPAddress("10.1.1.1", 29)
+    with CiscoSSH(
+        host="192.168.100.1", username="cisco", password="cisco", secret="cisco"
+    ) as r1:
+        print(r1.send_show_command("sh ip int br"))
+        print(r1.send_config_commands("logging 5.5.5.5"))
+        print(r1.send_show_command("sh run | i ^logging"))
 
-
+    with CiscoSSH(host="192.168.100.1", username="cisco", password="cisco") as r1:
+        print(r1.send_show_command("sh clock"))
+        print(r1.send_show_command("sh ip int br"))
