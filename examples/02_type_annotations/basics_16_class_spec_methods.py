@@ -1,4 +1,5 @@
 import ipaddress
+from typing import Any
 
 
 class IPAddress:
@@ -27,8 +28,9 @@ class IPAddress:
         return IPAddress(new_ip, self.mask)
 
     def __eq__(self, second_ip: object) -> bool:
-        if not isinstance(second_ip, IPAddress):
-            return NotImplemented
+        if type(second_ip) != IPAddress:
+            raise TypeError(f"'==' not supported between instances of 'IPAddress'"
+                            f" and '{type(second_ip).__name__}'")
         return (int(self), self.mask) == (int(second_ip), second_ip.mask)
 
     def __lt__(self, second_ip: IPAddress) -> bool:
