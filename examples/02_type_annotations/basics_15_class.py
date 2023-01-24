@@ -1,9 +1,8 @@
 from pprint import pprint
 import re
 import time
-from typing import Optional, Iterable, Any, Type
+from typing import Optional, Iterable, Type
 from types import TracebackType
-
 import paramiko
 
 
@@ -100,8 +99,8 @@ class CiscoSSH:
 
     def __exit__(
         self,
-        exc_type: Optional[Type[BaseException]],
-        exc_value: Optional[BaseException],
+        exception_type: Optional[Type[BaseException]],
+        exception_value: Optional[BaseException],
         traceback: Optional[TracebackType],
     ) -> None:
         self.close()
