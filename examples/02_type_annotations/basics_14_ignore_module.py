@@ -1,7 +1,6 @@
 from pprint import pprint
 import ipaddress
-
-from pyneng_cli_course.utils import green, red # type: ignore
+from advpyneng_cli_course.utils import green, red # type: ignore
 
 
 def check_ip(ip: str) -> bool:
