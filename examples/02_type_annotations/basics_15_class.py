@@ -1,19 +1,22 @@
 from pprint import pprint
 import re
 import time
+from typing import Optional, Iterable, Any, Type
+from types import TracebackType
+
 import paramiko
 
 
 class CiscoSSH:
     def __init__(
         self,
-        host,
-        username,
-        password,
-        secret=None,
-        pause=0.2,
-        max_read=100000,
-        read_timeout=2,
+        host: str,
+        username: str,
+        password: str,
+        secret: Optional[str] = None,
+        pause: float = 0.2,
+        max_read: int = 100000,
+        read_timeout: int = 2,
     ):
         self.host = host
         self.pause = pause
@@ -40,7 +43,7 @@ class CiscoSSH:
             self._read_until("#")
             self.prompt = self.get_prompt()
 
-    def get_prompt(self):
+    def get_prompt(self) -> str:
         self._send_command("sh clock")
         time.sleep(self.pause)
         output = self._read_until("[#>]")
@@ -50,14 +53,14 @@ class CiscoSSH:
         else:
             raise ValueError("Couldn't find a prompt")
 
-    def _send_command(self, command):
+    def _send_command(self, command: str) -> None:
         self._ssh.send(f"{command}\n")
 
-    def _read_until_prompt(self):
+    def _read_until_prompt(self) -> str:
         output = self._read_until(self.prompt)
         return output
 
-    def _read_until(self, regex):
+    def _read_until(self, regex: str) -> str:
         self._ssh.settimeout(self.read_timeout)
         output = ""
         while True:
@@ -72,12 +75,12 @@ class CiscoSSH:
                 break
         return output
 
-    def send_show_command(self, show_command):
+    def send_show_command(self, show_command: str) -> str:
         self._send_command(show_command)
         output = self._read_until_prompt()
         return output
 
-    def send_config_commands(self, commands):
+    def send_config_commands(self, commands: str | Iterable[str]) -> str:
         if type(commands) == str:
             commands = ["conf t", commands, "end"]
         else:
@@ -89,13 +92,18 @@ class CiscoSSH:
         output += self._read_until_prompt()
         return output
 
-    def close(self):
+    def close(self) -> None:
         self._ssh.close()
 
-    def __enter__(self):
+    def __enter__(self) -> CiscoSSH:
         return self
 
-    def __exit__(self, exc_type, exc_value, traceback):
+    def __exit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_value: Optional[BaseException],
+        traceback: Optional[TracebackType],
+    ) -> None:
         self.close()
 
 
