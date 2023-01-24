@@ -11,9 +11,6 @@ def check_passwd(
     if len(password) < min_length:
         print("Пароль слишком короткий")
         return False
-    elif check_username and username in password:
-        print("Пароль содержит имя пользователя")
-        return False
     elif forbidden_symbols and set(forbidden_symbols) & set(password):
         return False
     else:
