@@ -1,31 +1,34 @@
-from pprint import pprint
-import time
-from typing import Protocol
+from typing import SupportsInt, Iterable
+import ipaddress
 
 
-class Readable(Protocol):
-    def read(self, amount: int) -> str: ...
+class IPAddress:
+    def __init__(self, ip: str, mask: int):
+        self.ip = ip
+        self.mask = mask
+
+    def __int__(self) -> int:
+        int_ip = int(ipaddress.ip_address(self.ip))
+        return int_ip
+
+    def __str__(self) -> str:
+        return f"{self.ip}/{self.mask}"
+
+    def __repr__(self) -> str:
+        return f"IPAddress('{self.ip}', {self.mask})"
 
 
-class FileStream:
-    def __init__(self, filename: str):
-        self.filename = filename
-        self.stream = open(self.filename)
-
-    def read(self, amount: int) -> str:
-        return self.stream.read(amount)
-
-
-def read_stream(stream: Readable, part_size: int) -> None:
-    while True:
-        part = stream.read(part_size)
-        if part:
-            pprint(part)
-            time.sleep(0.2)
-        else:
-            break
+def convert_to_int(items: Iterable[SupportsInt]) -> list[int]:
+    new_items = []
+    for item in items:
+        new_items.append(int(item))
+    return new_items
 
 
 if __name__ == "__main__":
-    f = FileStream("output/sh_cdp_n_det.txt")
-    read_stream(f, 100)
+    ip1 = IPAddress("10.1.1.1", 25)
+    ip2 = IPAddress("10.2.2.2", 25)
+    ip3 = IPAddress("10.1.1.1", 25)
+    print(convert_to_int([ip1, 4.5]))
+
+
