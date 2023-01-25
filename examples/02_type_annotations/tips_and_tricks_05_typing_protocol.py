@@ -1,8 +1,8 @@
 from pprint import pprint
 import time
-from typing import Protocol
+from typing import Protocol, runtime_checkable
 
-
+@runtime_checkable
 class Readable(Protocol):
     def read(self, amount: int) -> str: ...
 
