@@ -1,7 +1,8 @@
 from pprint import pprint
 import re
 import time
-from typing import Optional, Iterable, Type
+from collections.abc import Iterable
+from typing import Optional, Type
 from types import TracebackType
 import paramiko
 

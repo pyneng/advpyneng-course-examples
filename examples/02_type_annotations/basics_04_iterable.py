@@ -1,5 +1,6 @@
 from collections.abc import Iterable
 
+
 def convert_to_lower(items: Iterable[str]) -> list[str]:
     result = []
     for item in items:
