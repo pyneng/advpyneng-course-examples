@@ -11,4 +11,3 @@ def get(host: str, **kwargs: Any) -> str:
 
 if __name__ == "__main__":
     print(get("10.1.1.1", url="google.com"))
-

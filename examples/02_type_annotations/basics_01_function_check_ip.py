@@ -12,5 +12,4 @@ def check_ip(ip: str) -> bool:
 if __name__ == "__main__":
     print(check_ip("10.1.1.1"))
     print(check_ip("test"))
-    print(check_ip(100)) # error
-
+    print(check_ip(100))  # error

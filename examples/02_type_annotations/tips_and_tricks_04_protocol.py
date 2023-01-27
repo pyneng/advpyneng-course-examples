@@ -22,10 +22,8 @@ def convert_to_int(items: Iterable[SupportsInt]) -> list[int]:
     return [int(item) for item in items]
 
 
-
 if __name__ == "__main__":
     ip1 = IPAddress("10.1.1.1", 25)
     ip2 = IPAddress("10.2.2.2", 25)
     ip3 = IPAddress("10.1.1.1", 25)
     print(convert_to_int([ip1, ip2, 10.5]))
-

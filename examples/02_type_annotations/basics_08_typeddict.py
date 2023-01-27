@@ -1,6 +1,7 @@
 from pprint import pprint
 from typing import Union, TypedDict
 
+
 class NetmikoParams(TypedDict, total=False):
     device_type: str
     host: str
@@ -40,7 +41,6 @@ def send_show_command_to_devices(
         output = f"{host}\n{command}"
         data[host] = output
     return data
-
 
 
 if __name__ == "__main__":

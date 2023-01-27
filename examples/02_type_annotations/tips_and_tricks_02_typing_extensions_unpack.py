@@ -1,5 +1,6 @@
 from typing import Optional, Iterable, Any, TypedDict
 from typing_extensions import Unpack
+
 # mypy basics_11_star_kwargs.py --strict --enable-incomplete-feature=Unpack
 
 
@@ -23,9 +24,7 @@ def check_passwd(
 
 
 def prompt_password(
-    username: str,
-    password: Optional[str] = None,
-    **kwargs: Unpack[CheckPasswdArgs]
+    username: str, password: Optional[str] = None, **kwargs: Unpack[CheckPasswdArgs]
 ) -> bool:
     reveal_type(kwargs)
     if password is None:

@@ -22,21 +22,27 @@ class IPAddress:
 
     def __add__(self, other: int) -> IPAddress:
         if type(other) != int:
-            raise TypeError(f"'+' not supported between instances of 'IPAddress'"
-                            f" and '{type(other).__name__}'")
+            raise TypeError(
+                f"'+' not supported between instances of 'IPAddress'"
+                f" and '{type(other).__name__}'"
+            )
         new_ip = self._int_to_str(int(self) + other)
         return IPAddress(new_ip, self.mask)
 
     def __eq__(self, second_ip: object) -> bool:
         if type(second_ip) != IPAddress:
-            raise TypeError(f"'==' not supported between instances of 'IPAddress'"
-                            f" and '{type(second_ip).__name__}'")
+            raise TypeError(
+                f"'==' not supported between instances of 'IPAddress'"
+                f" and '{type(second_ip).__name__}'"
+            )
         return (int(self), self.mask) == (int(second_ip), second_ip.mask)
 
     def __lt__(self, second_ip: IPAddress) -> bool:
         if type(second_ip) != IPAddress:
-            raise TypeError(f"'<' not supported between instances of 'IPAddress'"
-                            f" and '{type(second_ip).__name__}'")
+            raise TypeError(
+                f"'<' not supported between instances of 'IPAddress'"
+                f" and '{type(second_ip).__name__}'"
+            )
         return (int(self), self.mask) < (int(second_ip), second_ip.mask)
 
 
@@ -46,5 +52,3 @@ if __name__ == "__main__":
     ip3 = IPAddress("10.1.1.1", 25)
     ip4 = IPAddress("10.10.1.1", 25)
     ip5 = IPAddress("10.1.1.1", 29)
-
-

@@ -24,6 +24,7 @@ class CiscoSSH(BaseSSH):
     def send_config_commands(self, commands: str | list[str]) -> str:
         return "commands"
 
+
 if __name__ == "__main__":
     r1 = CiscoSSH(host="192.168.100.1", username="cisco", password="cisco")
     print(r1.send_show_command("sh ip int br", timeout=10))
@@ -41,4 +42,4 @@ if __name__ == "__main__":
 # basics_17_class_inheritance.py:24: note: This violates the Liskov substitution principle
 # basics_17_class_inheritance.py:24: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
 # Found 2 errors in 1 file (checked 1 source file)
-# 
+#
