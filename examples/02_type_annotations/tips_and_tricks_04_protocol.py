@@ -1,5 +1,6 @@
 import ipaddress
-from typing import Iterable, SupportsInt
+from collections.abc import Iterable
+from typing import SupportsInt
 
 
 class IPAddress:

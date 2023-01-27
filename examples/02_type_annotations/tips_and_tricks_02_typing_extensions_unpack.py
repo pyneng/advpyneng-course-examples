@@ -1,4 +1,5 @@
-from typing import Optional, Iterable, Any, TypedDict
+from collections.abc import Iterable
+from typing import Optional, Any, TypedDict
 from typing_extensions import Unpack
 
 # mypy basics_11_star_kwargs.py --strict --enable-incomplete-feature=Unpack
