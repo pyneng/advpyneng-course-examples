@@ -14,9 +14,9 @@ def ping_ip(ip_address, count):
         encoding="utf-8",
     )
     if reply.returncode == 0:
-        print(f"IP address {ip_address} is reachable")
+        return True
     else:
-        print(f"IP address {ip_address} is unreachable")
+        return False
 
 
 def cli(ip_address: str, count: int = 3):

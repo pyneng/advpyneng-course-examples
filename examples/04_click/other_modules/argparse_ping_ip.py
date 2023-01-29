@@ -14,9 +14,9 @@ def ping_ip(ip_address, count):
         encoding="utf-8",
     )
     if reply.returncode == 0:
-        print(f"IP address {ip_address} is reachable")
+        return True
     else:
-        print(f"IP address {ip_address} is unreachable")
+        return False
 
 
 def main():
@@ -32,9 +32,11 @@ def main():
         help="Number of packets",
     )
     args = parser.parse_args()
-    print(args)
-
-    ping_ip(args.host, args.count)
+    reply = ping_ip(args.host, args.count)
+    if reply:
+        print(f"IP address {ip_address} is reachable")
+    else:
+        print(f"IP address {ip_address} is unreachable")
 
 
 if __name__ == "__main__":

@@ -24,13 +24,18 @@ def ping_ip(ip_address, count):
         encoding="utf-8",
     )
     if reply.returncode == 0:
-        print(f"IP address {ip_address} is reachable")
+        return True
     else:
-        print(f"IP address {ip_address} is unreachable")
+        return False
 
 
 if __name__ == '__main__':
     args = docopt(__doc__)
     # print(args)
-    ping_ip(args.get("IP_ADDRESS"), args.get("--count"))
+    reply = ping_ip(args.get("IP_ADDRESS"), args.get("--count"))
+    if reply:
+        print(f"IP address {ip_address} is reachable")
+    else:
+        print(f"IP address {ip_address} is unreachable")
+
 
