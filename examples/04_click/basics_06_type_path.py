@@ -9,19 +9,24 @@ def send_command_to_devices(devices, command, limit=10):
 
 @click.command()
 @click.argument("command")
-@click.option("-y", "--yaml-params", type=click.File("r"))
-@click.option("-o", "--output", type=click.File("w"))
+@click.option(
+    "-y",
+    "--yaml-params",
+    type=click.Path(exists=True, dir_okay=False, resolve_path=True),
+)
+@click.option("-o", "--output", type=click.Path(dir_okay=False))
 def cli(yaml_params, command, output):
     """
     Отправить команду COMMAND на устройства из файла DEVICES-PARAMS
     """
     print(f"{yaml_params=}")
     print(f"{output=}")
-    devices = yaml.safe_load(yaml_params)
+    with open(yaml_params) as f:
+        devices = yaml.safe_load(f)
 
     result = send_command_to_devices(devices, command)
-    output.write(result)
-    print(f"{output=}")
+    with open(output, "w") as dst:
+        dst.write(result)
 
 
 if __name__ == "__main__":
