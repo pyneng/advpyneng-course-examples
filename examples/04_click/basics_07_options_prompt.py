@@ -21,11 +21,7 @@ def cli(command, hosts, username, password, secret):
     }
 
     device_list = [{**device_params, "host": ip} for ip in hosts]
-
     result = send_command_to_devices(device_list, command)
-    for ip, output in zip(hosts, result):
-        print(ip.center(30, "="))
-        print(output)
 
 
 if __name__ == "__main__":
