@@ -33,7 +33,6 @@ class IsIPv4(click.ParamType):
 
 @click.command()
 @click.argument("ipv4", type=IsIPv4())
-# @click.argument("ip-list", nargs=-1, required=True, type=IsIPv4())
 @click.option("-c", "--count", default=2, show_default=True)
 def cli(ipv4, count):
     print(f"{ipv4=} {count=}")
