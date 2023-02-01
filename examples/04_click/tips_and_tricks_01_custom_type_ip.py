@@ -6,7 +6,7 @@ import click
 
 def ping_ip(ip_address, count):
     """
-    Ping IP_ADDRESS and return True/False
+    Ping ip_address and return True/False
     """
     reply = subprocess.run(
         f"ping -c {count} -n {ip_address} -W 1",
@@ -21,18 +21,18 @@ def ping_ip(ip_address, count):
         return False
 
 
-class IsIPv4(click.ParamType):
+class ClickIPv4Address(click.ParamType):
     def convert(self, value, param, ctx):
         print(f"{value=} {param=} {ctx=}")
         try:
-            ip = ipaddress.ip_address(value)
-            return str(ip)
+            ipaddress.ip_address(value)
+            return value
         except ValueError:
             self.fail(f"'{value}' is not a valid IP address")
 
 
 @click.command()
-@click.argument("ipv4", type=IsIPv4())
+@click.argument("ipv4", type=ClickIPv4Address())
 @click.option("-c", "--count", default=2, show_default=True)
 def cli(ipv4, count):
     print(f"{ipv4=} {count=}")

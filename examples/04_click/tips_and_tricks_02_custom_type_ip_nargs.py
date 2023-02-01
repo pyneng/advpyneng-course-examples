@@ -21,18 +21,18 @@ def ping_ip(ip_address, count):
         return False
 
 
-class IsIPv4(click.ParamType):
+class ClickIPv4Address(click.ParamType):
     def convert(self, value, param, ctx):
         print(f"{value=} {param=} {ctx=}")
         try:
-            ip = ipaddress.ip_address(value)
-            return str(ip)
+            ipaddress.ip_address(value)
+            return value
         except ValueError:
             self.fail(f"'{value}' is not a valid IP address")
 
 
 @click.command()
-@click.argument("hosts", nargs=-1, required=True, type=IsIPv4())
+@click.argument("hosts", type=ClickIPv4Address(), nargs=-1, required=True)
 @click.option("-c", "--count", default=2, show_default=True)
 def cli(hosts, count):
     print(f"{hosts=} {count=}")
