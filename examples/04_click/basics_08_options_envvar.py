@@ -9,8 +9,9 @@ def send_command_to_devices(devices, command, limit=10):
 @click.command()
 @click.argument("command")
 @click.argument("hosts", nargs=-1, required=True)
-@click.option("-u", "--username", envvar="NET_USER", prompt=True)
+@click.option("-u", "--username", prompt=True)
 @click.option("-p", "--password", prompt=True, hide_input=True)
+# @click.option("-p", "--password", envvar="NETMIKO_SECRET" prompt=True, hide_input=True)
 @click.option("-s", "--secret", prompt=True, hide_input=True)
 def cli(command, hosts, username, password, secret):
     print(f"{command=} {hosts=} {username=} {password=} {secret=}")
