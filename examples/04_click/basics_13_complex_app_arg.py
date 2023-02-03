@@ -9,7 +9,7 @@ def dhcp_db():
 
 @dhcp_db.command()
 @click.option("--db-schema", "-s", help="db schema filename")
-@click.option("--db-filename", "-d", default="dhcp.db", help="db filename")
+@click.argument("db-filename")
 def create(db_schema, db_filename):
     """
     create DB
@@ -18,8 +18,8 @@ def create(db_schema, db_filename):
 
 
 @dhcp_db.command()
+@click.argument("db-filename")
 @click.argument("filenames", nargs=-1, required=True)
-@click.option("--db-filename", "-d", default="dhcp.db", help="db filename")
 def add(filenames, db_filename):
     """
     add data to db from FILENAMES
@@ -28,9 +28,9 @@ def add(filenames, db_filename):
 
 
 @dhcp_db.command()
+@click.argument("db-filename")
 @click.option("--key", "-k", type=click.Choice(["mac", "ip", "vlan"]))
 @click.option("--value", "-v", help="value of key")
-@click.option("--db-filename", "-d", default="dhcp.db", help="db filename")
 def get(key, value, db_filename):
     """
     get data from db
