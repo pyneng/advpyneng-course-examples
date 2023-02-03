@@ -8,6 +8,7 @@ def ping_ip(ip_address, count):
     """
     Ping ip_address and return True/False
     """
+    print(f"Calling: ping -c {count} -n {ip_address} -W 1")
     reply = subprocess.run(
         f"ping -c {count} -n {ip_address} -W 1",
         shell=True,

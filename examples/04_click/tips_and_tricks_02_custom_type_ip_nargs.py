@@ -8,6 +8,7 @@ def ping_ip(ip_address, count):
     """
     Ping IP_ADDRESS and return True/False
     """
+    print(f"Calling: ping -c {count} -n {ip_address} -W 1")
     reply = subprocess.run(
         f"ping -c {count} -n {ip_address} -W 1",
         shell=True,
@@ -24,9 +25,11 @@ def ping_ip(ip_address, count):
 class ClickIPv4Address(click.ParamType):
     def convert(self, value, param, ctx):
         print(f"{value=} {param=} {ctx=}")
+        # if isinstance(value, ipaddress.IPv4Address):
+        #    return value
         try:
-            ipaddress.ip_address(value)
-            return value
+            ip = ipaddress.ip_address(value)
+            return ip
         except ValueError:
             self.fail(f"'{value}' is not a valid IP address")
 
