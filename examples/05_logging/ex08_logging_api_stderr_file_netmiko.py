@@ -8,7 +8,7 @@ import click
 
 import yaml
 from netmiko import ConnectHandler
-from netmiko.ssh_exception import SSHException
+from netmiko.exceptions import SSHException
 
 import logging
 import sys
@@ -19,7 +19,7 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
 fmt = logging.Formatter(
-    "{asctime} - {name} - {levelname} - {message}", style="{"
+    "{asctime} {name} {levelname} {message}", style="{"
 )
 
 # Вывод на stderr

@@ -18,7 +18,7 @@ net.setLevel(logging.DEBUG)
 std = logging.StreamHandler()
 std.setLevel(logging.DEBUG)
 
-formatter = logging.Formatter("################ %(name)s %(levelname)s: %(message)s")
+formatter = logging.Formatter("################ {name} {levelname}: {message}", style="{")
 std.setFormatter(formatter)
 
 net.addHandler(std)
@@ -32,7 +32,7 @@ log.setLevel(logging.DEBUG)
 stderr = logging.StreamHandler()
 stderr.setLevel(logging.DEBUG)
 
-formatter = logging.Formatter("%(threadName)s %(name)s %(levelname)s: %(message)s")
+formatter = logging.Formatter("{threadName} {name} {levelname}: {message}", style="{")
 stderr.setFormatter(formatter)
 
 log.addHandler(stderr)

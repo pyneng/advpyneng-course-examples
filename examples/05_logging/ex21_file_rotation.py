@@ -10,7 +10,7 @@ logfile = logging.handlers.RotatingFileHandler(
 )
 logfile.setLevel(logging.DEBUG)
 formatter = logging.Formatter(
-    "{asctime} - {name} - {levelname} - {message}", datefmt="%H:%M:%S", style="{"
+    "{asctime} {name} {levelname} {message}", datefmt="%H:%M:%S", style="{"
 )
 logfile.setFormatter(formatter)
 

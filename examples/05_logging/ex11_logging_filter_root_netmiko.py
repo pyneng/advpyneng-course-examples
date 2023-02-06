@@ -1,5 +1,5 @@
 """
-filter for all loggers - apply to handler
+filter for all loggers apply to handler
 https://stackoverflow.com/a/17276457/4527817
 """
 from concurrent.futures import ThreadPoolExecutor
@@ -20,7 +20,7 @@ from logging_filters import LevelFilter, MessageFilter
 console = logging.StreamHandler()
 console.setLevel(logging.DEBUG)
 formatter = logging.Formatter(
-    "{asctime} - {name} - {levelname} - {message}", datefmt="%H:%M:%S", style="{"
+    "{asctime} {name} {levelname} {message}", datefmt="%H:%M:%S", style="{"
 )
 console.setFormatter(formatter)
 console.addFilter(LevelFilter(logging.INFO))

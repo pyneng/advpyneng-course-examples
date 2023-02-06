@@ -9,7 +9,7 @@ import click
 
 import yaml
 from netmiko import ConnectHandler
-from netmiko.ssh_exception import SSHException
+from netmiko.exceptions import SSHException
 from rich.logging import RichHandler
 
 fmt = logging.Formatter(

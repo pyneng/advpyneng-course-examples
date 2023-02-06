@@ -14,7 +14,7 @@ console.setLevel(logging.DEBUG)
 # console.addFilter(LevelFilter(logging.DEBUG))
 # console.addFilter(MessageFilter("test"))
 formatter = logging.Formatter(
-    "{asctime} - {name} - {levelname} - {message}", datefmt="%H:%M:%S", style="{"
+    "{asctime} {name} {levelname} {message}", datefmt="%H:%M:%S", style="{"
 )
 console.setFormatter(formatter)
 
@@ -24,7 +24,7 @@ logger.addHandler(console)
 logfile = logging.FileHandler("logfile3.log")
 logfile.setLevel(logging.DEBUG)
 
-formatter = logging.Formatter("{asctime} - {name} - {levelname} - {message}", style="{")
+formatter = logging.Formatter("{asctime} {name} {levelname} {message}", style="{")
 logfile.setFormatter(formatter)
 
 logger.addHandler(logfile)

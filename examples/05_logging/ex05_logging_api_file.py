@@ -5,7 +5,7 @@ logger.setLevel(logging.DEBUG)
 
 logfile = logging.FileHandler("logfile.log")
 logfile.setLevel(logging.WARNING)
-formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+formatter = logging.Formatter("{asctime} {name} {levelname} {message}", style="{")
 logfile.setFormatter(formatter)
 
 logger.addHandler(logfile)

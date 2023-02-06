@@ -11,7 +11,8 @@ from netmiko import ConnectHandler, NetMikoAuthenticationException
 logging.getLogger("paramiko").setLevel(logging.WARNING)
 
 logging.basicConfig(
-    format="%(threadName)s %(name)s %(levelname)s %(asctime)s: %(message)s", datefmt="%H:%M:%S",
+    format="{threadName} {name} {levelname} {asctime}: {message}", datefmt="%H:%M:%S",
+    style="{}"
     level=logging.INFO
 )
 
