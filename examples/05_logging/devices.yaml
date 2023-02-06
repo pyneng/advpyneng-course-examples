@@ -3,13 +3,40 @@
   username: cisco
   password: cisco
   secret: cisco
+  timeout: 3
 - device_type: cisco_ios
   host: 192.168.100.2
   username: cisco
   password: cisco
   secret: cisco
+  timeout: 3
 - device_type: cisco_ios
   host: 192.168.100.3
   username: cisco
   password: cisco
   secret: cisco
+  timeout: 3
+- device_type: cisco_ios
+  host: 192.168.100.13
+  username: cisco
+  password: cisco
+  secret: cisco
+  timeout: 3
+- device_type: cisco_ios
+  host: 192.168.100.1
+  username: cisco
+  password: cisco
+  secret: cisco
+  timeout: 3
+- device_type: cisco_ios
+  host: 192.168.100.2
+  username: cisco
+  password: cisco
+  secret: cisco
+  timeout: 3
+- device_type: cisco_ios
+  host: 192.168.100.3
+  username: cisco
+  password: cisco
+  secret: cisco
+  timeout: 3
