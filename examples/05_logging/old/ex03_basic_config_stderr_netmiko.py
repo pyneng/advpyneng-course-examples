@@ -12,7 +12,7 @@ logging.getLogger("paramiko").setLevel(logging.WARNING)
 
 logging.basicConfig(
     format="{threadName} {name} {levelname} {asctime}: {message}", datefmt="%H:%M:%S",
-    style="{}"
+    style="{"
     level=logging.INFO
 )
 
