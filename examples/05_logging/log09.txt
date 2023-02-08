@@ -1,0 +1,364 @@
+2023-02-08 17:09:28,127 root INFO       ===> Connection: 192.168.100.1
+2023-02-08 17:09:28,170 paramiko.transport INFO       Connected (version 2.0, client Cisco-1.25)
+2023-02-08 17:09:28,170 paramiko.transport INFO       Connected (version 2.0, client Cisco-1.25)
+2023-02-08 17:09:28,784 paramiko.transport INFO       Authentication (password) successful!
+2023-02-08 17:09:28,784 paramiko.transport INFO       Authentication (password) successful!
+2023-02-08 17:09:28,789 netmiko DEBUG      write_channel: b'\n'
+2023-02-08 17:09:28,789 netmiko DEBUG      write_channel: b'\n'
+2023-02-08 17:09:28,890 netmiko DEBUG      write_channel: b'terminal width 511\n'
+2023-02-08 17:09:28,890 netmiko DEBUG      write_channel: b'terminal width 511\n'
+2023-02-08 17:09:28,890 netmiko DEBUG      read_channel: R1>
+R1>
+2023-02-08 17:09:28,890 netmiko DEBUG      read_channel: R1>
+R1>
+2023-02-08 17:09:28,901 netmiko DEBUG      read_channel: ter
+2023-02-08 17:09:28,901 netmiko DEBUG      read_channel: ter
+2023-02-08 17:09:28,911 netmiko DEBUG      read_channel: mi
+2023-02-08 17:09:28,911 netmiko DEBUG      read_channel: mi
+2023-02-08 17:09:28,922 netmiko DEBUG      read_channel: nal w
+2023-02-08 17:09:28,922 netmiko DEBUG      read_channel: nal w
+2023-02-08 17:09:28,933 netmiko DEBUG      read_channel: idth
+2023-02-08 17:09:28,933 netmiko DEBUG      read_channel: idth
+2023-02-08 17:09:28,943 netmiko DEBUG      read_channel:  51
+2023-02-08 17:09:28,943 netmiko DEBUG      read_channel:  51
+2023-02-08 17:09:28,954 netmiko DEBUG      read_channel: 1
+R1>
+2023-02-08 17:09:28,954 netmiko DEBUG      read_channel: 1
+R1>
+2023-02-08 17:09:28,954 netmiko DEBUG      Pattern found: (terminal width 511) R1>
+R1>terminal width 511
+2023-02-08 17:09:28,954 netmiko DEBUG      Pattern found: (terminal width 511) R1>
+R1>terminal width 511
+2023-02-08 17:09:28,955 netmiko DEBUG      In disable_paging
+2023-02-08 17:09:28,955 netmiko DEBUG      In disable_paging
+2023-02-08 17:09:28,955 netmiko DEBUG      Command: terminal length 0
+
+2023-02-08 17:09:28,955 netmiko DEBUG      Command: terminal length 0
+
+2023-02-08 17:09:28,955 netmiko DEBUG      write_channel: b'terminal length 0\n'
+2023-02-08 17:09:28,955 netmiko DEBUG      write_channel: b'terminal length 0\n'
+2023-02-08 17:09:28,955 netmiko DEBUG      read_channel: 
+2023-02-08 17:09:28,955 netmiko DEBUG      read_channel: 
+2023-02-08 17:09:28,966 netmiko DEBUG      read_channel: ter
+2023-02-08 17:09:28,966 netmiko DEBUG      read_channel: ter
+2023-02-08 17:09:28,979 netmiko DEBUG      read_channel: mina
+2023-02-08 17:09:28,979 netmiko DEBUG      read_channel: mina
+2023-02-08 17:09:28,990 netmiko DEBUG      read_channel: l le
+2023-02-08 17:09:28,990 netmiko DEBUG      read_channel: l le
+2023-02-08 17:09:29,000 netmiko DEBUG      read_channel: ngth
+2023-02-08 17:09:29,000 netmiko DEBUG      read_channel: ngth
+2023-02-08 17:09:29,011 netmiko DEBUG      read_channel:  0
+2023-02-08 17:09:29,011 netmiko DEBUG      read_channel:  0
+2023-02-08 17:09:29,012 netmiko DEBUG      Pattern found: (terminal\ length\ 0) 
+R1>terminal length 0
+2023-02-08 17:09:29,012 netmiko DEBUG      Pattern found: (terminal\ length\ 0) 
+R1>terminal length 0
+2023-02-08 17:09:29,012 netmiko DEBUG      
+R1>terminal length 0
+2023-02-08 17:09:29,012 netmiko DEBUG      
+R1>terminal length 0
+2023-02-08 17:09:29,012 netmiko DEBUG      Exiting disable_paging
+2023-02-08 17:09:29,012 netmiko DEBUG      Exiting disable_paging
+2023-02-08 17:09:29,028 netmiko DEBUG      read_channel: 
+R1>
+2023-02-08 17:09:29,028 netmiko DEBUG      read_channel: 
+R1>
+2023-02-08 17:09:29,037 netmiko DEBUG      Clear buffer detects data in the channel
+2023-02-08 17:09:29,037 netmiko DEBUG      Clear buffer detects data in the channel
+2023-02-08 17:09:29,064 netmiko DEBUG      read_channel: 
+2023-02-08 17:09:29,064 netmiko DEBUG      read_channel: 
+2023-02-08 17:09:29,068 netmiko DEBUG      write_channel: b'\n'
+2023-02-08 17:09:29,068 netmiko DEBUG      write_channel: b'\n'
+2023-02-08 17:09:29,071 netmiko DEBUG      read_channel: 
+2023-02-08 17:09:29,071 netmiko DEBUG      read_channel: 
+2023-02-08 17:09:29,090 netmiko DEBUG      read_channel: 
+R1>
+2023-02-08 17:09:29,090 netmiko DEBUG      read_channel: 
+R1>
+2023-02-08 17:09:29,093 netmiko DEBUG      Pattern found: (\#|>) 
+R1>
+2023-02-08 17:09:29,093 netmiko DEBUG      Pattern found: (\#|>) 
+R1>
+2023-02-08 17:09:29,110 netmiko DEBUG      read_channel: 
+2023-02-08 17:09:29,110 netmiko DEBUG      read_channel: 
+2023-02-08 17:09:29,112 netmiko DEBUG      [find_prompt()]: prompt is R1>
+2023-02-08 17:09:29,112 netmiko DEBUG      [find_prompt()]: prompt is R1>
+2023-02-08 17:09:29,116 netmiko DEBUG      write_channel: b'\n'
+2023-02-08 17:09:29,116 netmiko DEBUG      write_channel: b'\n'
+2023-02-08 17:09:29,119 netmiko DEBUG      read_channel: 
+2023-02-08 17:09:29,119 netmiko DEBUG      read_channel: 
+2023-02-08 17:09:29,132 netmiko DEBUG      read_channel: 
+R1>
+2023-02-08 17:09:29,132 netmiko DEBUG      read_channel: 
+R1>
+2023-02-08 17:09:29,133 netmiko DEBUG      Pattern found: (R1.*) 
+R1>
+2023-02-08 17:09:29,133 netmiko DEBUG      Pattern found: (R1.*) 
+R1>
+2023-02-08 17:09:29,138 netmiko DEBUG      write_channel: b'enable\n'
+2023-02-08 17:09:29,138 netmiko DEBUG      write_channel: b'enable\n'
+2023-02-08 17:09:29,153 netmiko DEBUG      read_channel: ena
+2023-02-08 17:09:29,153 netmiko DEBUG      read_channel: ena
+2023-02-08 17:09:29,168 netmiko DEBUG      read_channel: ble
+
+2023-02-08 17:09:29,168 netmiko DEBUG      read_channel: ble
+
+2023-02-08 17:09:29,179 netmiko DEBUG      Pattern found: (enable) enable
+2023-02-08 17:09:29,179 netmiko DEBUG      Pattern found: (enable) enable
+2023-02-08 17:09:29,183 netmiko DEBUG      read_channel: Password: 
+2023-02-08 17:09:29,183 netmiko DEBUG      read_channel: Password: 
+2023-02-08 17:09:29,185 netmiko DEBUG      Pattern found: ((?:R1|ssword)) 
+Password
+2023-02-08 17:09:29,185 netmiko DEBUG      Pattern found: ((?:R1|ssword)) 
+Password
+2023-02-08 17:09:29,193 netmiko DEBUG      write_channel: b'********\n'
+2023-02-08 17:09:29,193 netmiko DEBUG      write_channel: b'********\n'
+2023-02-08 17:09:29,199 netmiko DEBUG      read_channel: 
+2023-02-08 17:09:29,199 netmiko DEBUG      read_channel: 
+2023-02-08 17:09:29,211 netmiko DEBUG      read_channel: 
+2023-02-08 17:09:29,211 netmiko DEBUG      read_channel: 
+2023-02-08 17:09:29,222 netmiko DEBUG      read_channel: 
+R1#
+2023-02-08 17:09:29,222 netmiko DEBUG      read_channel: 
+R1#
+2023-02-08 17:09:29,225 netmiko DEBUG      Pattern found: (R1) : 
+R1
+2023-02-08 17:09:29,225 netmiko DEBUG      Pattern found: (R1) : 
+R1
+2023-02-08 17:09:29,234 netmiko DEBUG      write_channel: b'\n'
+2023-02-08 17:09:29,234 netmiko DEBUG      write_channel: b'\n'
+2023-02-08 17:09:29,236 netmiko DEBUG      read_channel: 
+2023-02-08 17:09:29,236 netmiko DEBUG      read_channel: 
+2023-02-08 17:09:29,260 netmiko DEBUG      read_channel: 
+R1#
+2023-02-08 17:09:29,260 netmiko DEBUG      read_channel: 
+R1#
+2023-02-08 17:09:29,265 netmiko DEBUG      Pattern found: (R1.*) #
+R1#
+2023-02-08 17:09:29,265 netmiko DEBUG      Pattern found: (R1.*) #
+R1#
+2023-02-08 17:09:29,277 netmiko DEBUG      read_channel: 
+2023-02-08 17:09:29,277 netmiko DEBUG      read_channel: 
+2023-02-08 17:09:29,278 netmiko DEBUG      write_channel: b'\n'
+2023-02-08 17:09:29,278 netmiko DEBUG      write_channel: b'\n'
+2023-02-08 17:09:29,309 netmiko DEBUG      read_channel: 
+R1#
+2023-02-08 17:09:29,309 netmiko DEBUG      read_channel: 
+R1#
+2023-02-08 17:09:29,322 netmiko DEBUG      read_channel: 
+2023-02-08 17:09:29,322 netmiko DEBUG      read_channel: 
+2023-02-08 17:09:29,323 netmiko DEBUG      [find_prompt()]: prompt is R1#
+2023-02-08 17:09:29,323 netmiko DEBUG      [find_prompt()]: prompt is R1#
+2023-02-08 17:09:29,324 netmiko DEBUG      write_channel: b'sh ip int br\n'
+2023-02-08 17:09:29,324 netmiko DEBUG      write_channel: b'sh ip int br\n'
+2023-02-08 17:09:29,324 netmiko DEBUG      read_channel: 
+2023-02-08 17:09:29,324 netmiko DEBUG      read_channel: 
+2023-02-08 17:09:29,335 netmiko DEBUG      read_channel: sh 
+2023-02-08 17:09:29,335 netmiko DEBUG      read_channel: sh 
+2023-02-08 17:09:29,346 netmiko DEBUG      read_channel: ip
+2023-02-08 17:09:29,346 netmiko DEBUG      read_channel: ip
+2023-02-08 17:09:29,361 netmiko DEBUG      read_channel:  int b
+2023-02-08 17:09:29,361 netmiko DEBUG      read_channel:  int b
+2023-02-08 17:09:29,377 netmiko DEBUG      read_channel: r
+
+2023-02-08 17:09:29,377 netmiko DEBUG      read_channel: r
+
+2023-02-08 17:09:29,379 netmiko DEBUG      Pattern found: (sh\ ip\ int\ br) sh ip int br
+2023-02-08 17:09:29,379 netmiko DEBUG      Pattern found: (sh\ ip\ int\ br) sh ip int br
+2023-02-08 17:09:29,412 netmiko DEBUG      read_channel: Interface                  IP-Address      OK? Method Status                Protocol
+Ethernet0/0                192.168.100.1   YES NVRAM  up                    up      
+Ethernet0/1                192.168.200.1   YES NVRAM  up                    up      
+Ethernet0/2                unassigned      YES NVRAM  up                    up      
+Ethernet0/3                192.168.130.1   YES NVRAM  up                    up      
+Loopback11                 11.1.1.1        YES NVRAM  up                    up      
+Loopback55                 5.5.5.5         YES NVRAM  up                    up      
+Loopback99                 unassigned      YES unset  up                    up      
+Loopback100                10.1.1.100      YES NVRAM  up                    up      
+Loopback142                unassigned      YES unset  up                    up      
+Loopback200                10.2.2.2        YES NVRAM  up                    up      
+Tunnel0                    10.255.1.1      YES NVRAM  up                    down    
+Tunnel1                    unassigned      YES unset  up                    down    
+Tunnel9                    unassigned      YES unset  up                    down    
+R1#
+2023-02-08 17:09:29,412 netmiko DEBUG      read_channel: Interface                  IP-Address      OK? Method Status                Protocol
+Ethernet0/0                192.168.100.1   YES NVRAM  up                    up      
+Ethernet0/1                192.168.200.1   YES NVRAM  up                    up      
+Ethernet0/2                unassigned      YES NVRAM  up                    up      
+Ethernet0/3                192.168.130.1   YES NVRAM  up                    up      
+Loopback11                 11.1.1.1        YES NVRAM  up                    up      
+Loopback55                 5.5.5.5         YES NVRAM  up                    up      
+Loopback99                 unassigned      YES unset  up                    up      
+Loopback100                10.1.1.100      YES NVRAM  up                    up      
+Loopback142                unassigned      YES unset  up                    up      
+Loopback200                10.2.2.2        YES NVRAM  up                    up      
+Tunnel0                    10.255.1.1      YES NVRAM  up                    down    
+Tunnel1                    unassigned      YES unset  up                    down    
+Tunnel9                    unassigned      YES unset  up                    down    
+R1#
+2023-02-08 17:09:29,415 root DEBUG      <=== Received: output from 192.168.100.1
+Interface                  IP-Address      OK? Method Status                Protocol
+Ethernet0/0                192.168.100.1   YES NVRAM  up                    up      
+Ethernet0/1                192.168.200.1   YES NVRAM  up                    up      
+Ethernet0/2                unassigned      YES NVRAM  up                    up      
+Ethernet0/3                192.168.130.1   YES NVRAM  up                    up      
+Loopback11                 11.1.1.1        YES NVRAM  up                    up      
+Loopback55                 5.5.5.5         YES NVRAM  up                    up      
+Loopback99                 unassigned      YES unset  up                    up      
+Loopback100                10.1.1.100      YES NVRAM  up                    up      
+Loopback142                unassigned      YES unset  up                    up      
+Loopback200                10.2.2.2        YES NVRAM  up                    up      
+Tunnel0                    10.255.1.1      YES NVRAM  up                    down    
+Tunnel1                    unassigned      YES unset  up                    down    
+Tunnel9                    unassigned      YES unset  up                    down    
+2023-02-08 17:09:29,415 netmiko DEBUG      write_channel: b'\n'
+2023-02-08 17:09:29,415 netmiko DEBUG      write_channel: b'\n'
+2023-02-08 17:09:29,415 netmiko DEBUG      read_channel: 
+2023-02-08 17:09:29,415 netmiko DEBUG      read_channel: 
+2023-02-08 17:09:29,426 netmiko DEBUG      read_channel: 
+R1#
+2023-02-08 17:09:29,426 netmiko DEBUG      read_channel: 
+R1#
+2023-02-08 17:09:29,431 netmiko DEBUG      Pattern found: ([>#]) 
+R1#
+2023-02-08 17:09:29,431 netmiko DEBUG      Pattern found: ([>#]) 
+R1#
+2023-02-08 17:09:29,432 netmiko DEBUG      write_channel: b'exit\n'
+2023-02-08 17:09:29,432 netmiko DEBUG      write_channel: b'exit\n'
+2023-02-08 17:10:46,559 root INFO       ===> Connection: 192.168.100.1
+2023-02-08 17:10:46,576 paramiko.transport INFO       Connected (version 2.0, client Cisco-1.25)
+2023-02-08 17:10:47,171 paramiko.transport INFO       Authentication (password) successful!
+2023-02-08 17:10:47,614 root DEBUG      <=== Received: output from 192.168.100.1
+Interface                  IP-Address      OK? Method Status                Protocol
+Ethernet0/0                192.168.100.1   YES NVRAM  up                    up      
+Ethernet0/1                192.168.200.1   YES NVRAM  up                    up      
+Ethernet0/2                unassigned      YES NVRAM  up                    up      
+Ethernet0/3                192.168.130.1   YES NVRAM  up                    up      
+Loopback11                 11.1.1.1        YES NVRAM  up                    up      
+Loopback55                 5.5.5.5         YES NVRAM  up                    up      
+Loopback99                 unassigned      YES unset  up                    up      
+Loopback100                10.1.1.100      YES NVRAM  up                    up      
+Loopback142                unassigned      YES unset  up                    up      
+Loopback200                10.2.2.2        YES NVRAM  up                    up      
+Tunnel0                    10.255.1.1      YES NVRAM  up                    down    
+Tunnel1                    unassigned      YES unset  up                    down    
+Tunnel9                    unassigned      YES unset  up                    down    
+2023-02-08 17:11:16,859 root INFO       ===> Connection: 192.168.100.1
+2023-02-08 17:11:16,926 paramiko.transport INFO       Connected (version 2.0, client Cisco-1.25)
+2023-02-08 17:11:17,594 paramiko.transport INFO       Authentication (password) successful!
+2023-02-08 17:11:17,599 netmiko DEBUG      write_channel: b'\n'
+2023-02-08 17:11:17,700 netmiko DEBUG      write_channel: b'terminal width 511\n'
+2023-02-08 17:11:17,701 netmiko DEBUG      read_channel: R1>
+R1>
+2023-02-08 17:11:17,711 netmiko DEBUG      read_channel: te
+2023-02-08 17:11:17,723 netmiko DEBUG      read_channel: rminal wi
+2023-02-08 17:11:17,733 netmiko DEBUG      read_channel: dth 511
+R1>
+2023-02-08 17:11:17,734 netmiko DEBUG      Pattern found: (terminal width 511) R1>
+R1>terminal width 511
+2023-02-08 17:11:17,734 netmiko DEBUG      In disable_paging
+2023-02-08 17:11:17,735 netmiko DEBUG      Command: terminal length 0
+
+2023-02-08 17:11:17,737 netmiko DEBUG      write_channel: b'terminal length 0\n'
+2023-02-08 17:11:17,737 netmiko DEBUG      read_channel: 
+2023-02-08 17:11:17,750 netmiko DEBUG      read_channel: ter
+2023-02-08 17:11:17,764 netmiko DEBUG      read_channel: mina
+2023-02-08 17:11:17,776 netmiko DEBUG      read_channel: l le
+2023-02-08 17:11:17,790 netmiko DEBUG      read_channel: ngth
+2023-02-08 17:11:17,801 netmiko DEBUG      read_channel:  0
+R1>
+2023-02-08 17:11:17,804 netmiko DEBUG      Pattern found: (terminal\ length\ 0) 
+R1>terminal length 0
+2023-02-08 17:11:17,805 netmiko DEBUG      
+R1>terminal length 0
+2023-02-08 17:11:17,812 netmiko DEBUG      Exiting disable_paging
+2023-02-08 17:11:17,824 netmiko DEBUG      read_channel: 
+2023-02-08 17:11:17,833 netmiko DEBUG      Clear buffer detects data in the channel
+2023-02-08 17:11:17,854 netmiko DEBUG      read_channel: 
+2023-02-08 17:11:17,855 netmiko DEBUG      write_channel: b'\n'
+2023-02-08 17:11:17,856 netmiko DEBUG      read_channel: 
+2023-02-08 17:11:17,867 netmiko DEBUG      read_channel: 
+R1>
+2023-02-08 17:11:17,870 netmiko DEBUG      Pattern found: (\#|>) 
+R1>
+2023-02-08 17:11:17,882 netmiko DEBUG      read_channel: 
+2023-02-08 17:11:17,886 netmiko DEBUG      [find_prompt()]: prompt is R1>
+2023-02-08 17:11:17,891 netmiko DEBUG      write_channel: b'\n'
+2023-02-08 17:11:17,892 netmiko DEBUG      read_channel: 
+2023-02-08 17:11:17,904 netmiko DEBUG      read_channel: 
+R1>
+2023-02-08 17:11:17,906 netmiko DEBUG      Pattern found: (R1.*) 
+R1>
+2023-02-08 17:11:17,913 netmiko DEBUG      write_channel: b'enable\n'
+2023-02-08 17:11:17,919 netmiko DEBUG      read_channel: 
+2023-02-08 17:11:17,932 netmiko DEBUG      read_channel: enab
+2023-02-08 17:11:17,946 netmiko DEBUG      read_channel: le
+
+2023-02-08 17:11:17,948 netmiko DEBUG      Pattern found: (enable) enable
+2023-02-08 17:11:17,953 netmiko DEBUG      read_channel: Password: 
+2023-02-08 17:11:17,958 netmiko DEBUG      Pattern found: ((?:R1|ssword)) 
+Password
+2023-02-08 17:11:17,967 netmiko DEBUG      write_channel: b'********\n'
+2023-02-08 17:11:17,968 netmiko DEBUG      read_channel: 
+2023-02-08 17:11:17,982 netmiko DEBUG      read_channel: 
+2023-02-08 17:11:17,993 netmiko DEBUG      read_channel: 
+R1#
+2023-02-08 17:11:18,002 netmiko DEBUG      Pattern found: (R1) : 
+R1
+2023-02-08 17:11:18,014 netmiko DEBUG      write_channel: b'\n'
+2023-02-08 17:11:18,015 netmiko DEBUG      read_channel: 
+2023-02-08 17:11:18,026 netmiko DEBUG      read_channel: 
+R1#
+2023-02-08 17:11:18,027 netmiko DEBUG      Pattern found: (R1.*) #
+R1#
+2023-02-08 17:11:18,046 netmiko DEBUG      read_channel: 
+2023-02-08 17:11:18,047 netmiko DEBUG      write_channel: b'\n'
+2023-02-08 17:11:18,072 netmiko DEBUG      read_channel: 
+R1#
+2023-02-08 17:11:18,082 netmiko DEBUG      read_channel: 
+2023-02-08 17:11:18,083 netmiko DEBUG      [find_prompt()]: prompt is R1#
+2023-02-08 17:11:18,086 netmiko DEBUG      write_channel: b'sh ip int br\n'
+2023-02-08 17:11:18,089 netmiko DEBUG      read_channel: 
+2023-02-08 17:11:18,101 netmiko DEBUG      read_channel: sh 
+2023-02-08 17:11:18,114 netmiko DEBUG      read_channel: ip
+2023-02-08 17:11:18,125 netmiko DEBUG      read_channel:  int b
+2023-02-08 17:11:18,135 netmiko DEBUG      read_channel: r
+Interface                  IP-Address      OK? Method Status                Protocol
+Ethernet0/0                192.168.100.1   YES NVRAM  up                    up      
+Ethernet0/1                192.168.200.1   YES NVRAM  up                    up      
+Ethernet0/2                unassigned      YES NVRAM  up                    up      
+Ethernet0/3                192.168.130.1   YES NVRAM  up                    up      
+Loopback11                 11.1.1.1        YES NVRAM  up                    up      
+Loopback55                 5.5.5.5         YES NVRAM  up                    up      
+Loopback99                 unassigned      YES unset  up                    up      
+Loopback100                10.1.1.100      YES NVRAM  up                    up      
+Loopback142                unassigned      YES unset  up                    up      
+Loopback200                10.2.2.2        YES NVRAM  up                    up      
+Tunnel0                    10.255.1.1      YES NVRAM  up                    down    
+Tunnel1                    unassigned      YES unset  up                    down    
+Tunnel9                    unassigned      YES unset  up                    down    
+R1#
+2023-02-08 17:11:18,136 netmiko DEBUG      Pattern found: (sh\ ip\ int\ br) sh ip int br
+2023-02-08 17:11:18,162 netmiko DEBUG      read_channel: 
+2023-02-08 17:11:18,162 root DEBUG      <=== Received: output from 192.168.100.1
+Interface                  IP-Address      OK? Method Status                Protocol
+Ethernet0/0                192.168.100.1   YES NVRAM  up                    up      
+Ethernet0/1                192.168.200.1   YES NVRAM  up                    up      
+Ethernet0/2                unassigned      YES NVRAM  up                    up      
+Ethernet0/3                192.168.130.1   YES NVRAM  up                    up      
+Loopback11                 11.1.1.1        YES NVRAM  up                    up      
+Loopback55                 5.5.5.5         YES NVRAM  up                    up      
+Loopback99                 unassigned      YES unset  up                    up      
+Loopback100                10.1.1.100      YES NVRAM  up                    up      
+Loopback142                unassigned      YES unset  up                    up      
+Loopback200                10.2.2.2        YES NVRAM  up                    up      
+Tunnel0                    10.255.1.1      YES NVRAM  up                    down    
+Tunnel1                    unassigned      YES unset  up                    down    
+Tunnel9                    unassigned      YES unset  up                    down    
+2023-02-08 17:11:18,167 netmiko DEBUG      write_channel: b'\n'
+2023-02-08 17:11:18,168 netmiko DEBUG      read_channel: 
+2023-02-08 17:11:18,181 netmiko DEBUG      read_channel: 
+
+2023-02-08 17:11:18,192 netmiko DEBUG      read_channel: R1#
+2023-02-08 17:11:18,192 netmiko DEBUG      Pattern found: ([>#]) 
+R1#
+2023-02-08 17:11:18,193 netmiko DEBUG      write_channel: b'exit\n'

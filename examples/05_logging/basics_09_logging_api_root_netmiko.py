@@ -1,18 +1,28 @@
 import logging
 from netmiko import Netmiko
 
-log = logging.getLogger(__name__)
+
+log = logging.getLogger()
 log.setLevel(logging.DEBUG)
+# netmiko/paramiko
+logging.getLogger("netmiko").setLevel(logging.DEBUG)
+logging.getLogger("paramiko").setLevel(logging.INFO)
 
-fmt = logging.Formatter(
-    "{asctime} {name} {levelname:10} {message}", style="{"
-)
+fmt = logging.Formatter("{asctime} {name} {levelname:10} {message}", style="{")
 
+# stderr
 stderr = logging.StreamHandler()
 stderr.setLevel(logging.DEBUG)
 stderr.setFormatter(fmt)
 
 log.addHandler(stderr)
+
+# file
+logfile = logging.FileHandler("log09.txt")
+logfile.setLevel(logging.DEBUG)
+logfile.setFormatter(fmt)
+
+log.addHandler(logfile)
 
 
 def send_show_netmiko(device_dict, command):
@@ -21,9 +31,9 @@ def send_show_netmiko(device_dict, command):
 
     with Netmiko(**device_dict) as ssh:
         ssh.enable()
-        result = ssh.send_command(command)
-        log.info(f"<=== Received:   {ip}")
-    return result
+        output = ssh.send_command(command)
+        log.debug(f"<=== Received: output from {ip}\n{output}")
+    return output
 
 
 if __name__ == "__main__":
