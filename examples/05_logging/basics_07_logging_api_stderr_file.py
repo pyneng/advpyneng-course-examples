@@ -1,25 +1,29 @@
 import logging
+from rich import inspect
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
-### stderr
-console = logging.StreamHandler()
-console.setLevel(logging.DEBUG)
-formatter = logging.Formatter(
-    "{asctime} {name} {levelname} {message}", datefmt="%H:%M:%S", style="{"
-)
-console.setFormatter(formatter)
+fmt = logging.Formatter("{asctime} {name} {levelname:10} {message}", style="{")
 
-logger.addHandler(console)
-
-### File
-logfile = logging.FileHandler("logfile3.log")
-logfile.setLevel(logging.WARNING)
-formatter = logging.Formatter("{asctime} {name} {levelname} {message}", style="{")
-logfile.setFormatter(formatter)
+# file
+logfile = logging.FileHandler("log07.txt")
+logfile.setLevel(logging.INFO)
+logfile.setFormatter(fmt)
 
 logger.addHandler(logfile)
+
+# stderr
+
+stderr = logging.StreamHandler()
+stderr.setLevel(logging.DEBUG)
+stderr.setFormatter(
+    logging.Formatter(
+        "{asctime} {name} {levelname:10} {message}", style="{", datefmt="%H:%M:%S"
+    )
+)
+
+logger.addHandler(stderr)
 
 ## messages
 logger.debug("Сообщение уровня debug")

@@ -1,9 +1,6 @@
 import logging
 from netmiko import Netmiko
 
-logging.getLogger("netmiko").setLevel(logging.WARNING)
-logging.getLogger("paramiko").setLevel(logging.INFO)
-
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
@@ -17,18 +14,15 @@ stderr.setFormatter(fmt)
 
 log.addHandler(stderr)
 
-log.debug("Сообщение уровня debug")
-log.info("Сообщение уровня info")
-log.warning("Сообщение уровня warning")
 
 def send_show_netmiko(device_dict, command):
     ip = device_dict["host"]
-    logging.info(f"===> Connection: {ip}")
+    log.info(f"===> Connection: {ip}")
 
     with Netmiko(**device_dict) as ssh:
         ssh.enable()
         result = ssh.send_command(command)
-        logging.info(f"<=== Received:   {ip}")
+        log.info(f"<=== Received:   {ip}")
     return result
 
 

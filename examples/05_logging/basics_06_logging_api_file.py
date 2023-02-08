@@ -3,10 +3,11 @@ import logging
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
-logfile = logging.FileHandler("logfile.log")
-logfile.setLevel(logging.WARNING)
-formatter = logging.Formatter("{asctime} {name} {levelname} {message}", style="{")
-logfile.setFormatter(formatter)
+fmt = logging.Formatter("{asctime} {name} {levelname:10} {message}", style="{")
+
+logfile = logging.FileHandler("log06.txt")
+logfile.setLevel(logging.DEBUG)
+logfile.setFormatter(fmt)
 
 logger.addHandler(logfile)
 
