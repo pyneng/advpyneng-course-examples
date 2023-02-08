@@ -1,9 +1,11 @@
 from pprint import pprint
 import logging
 import logging.config
+from rich import inspect
 
 # create logger
 logger = logging.getLogger(__name__)
+# inspect(logger)
 
 cfg = {
     "version": 1,
@@ -33,12 +35,12 @@ cfg = {
         "__main__": {
             "level": "DEBUG",
             "handlers": ["stderr", "logfile"],
-            "propagate": False,
         }
     },
 }
 
 logging.config.dictConfig(cfg)
+# inspect(logger)
 
 ## messages
 logger.debug("Сообщение уровня debug")
