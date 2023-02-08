@@ -18,7 +18,12 @@ stderr.setFormatter(fmt)
 
 log.addHandler(stderr)
 
-## messages
+# messages
 log.debug("Сообщение уровня debug")
 log.info("Сообщение уровня info")
 log.warning("Сообщение уровня warning")
+
+# root messages
+logging.debug("LOGGING Сообщение уровня debug")
+logging.info("LOGGING Сообщение уровня info")
+logging.warning("LOGGING Сообщение уровня warning")
