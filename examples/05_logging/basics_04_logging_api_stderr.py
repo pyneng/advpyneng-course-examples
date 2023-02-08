@@ -1,7 +1,5 @@
 import logging
 
-# root logger
-# logger = logging.getLogger()
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
