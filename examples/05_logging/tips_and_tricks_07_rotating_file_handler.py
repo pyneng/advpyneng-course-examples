@@ -1,11 +1,11 @@
 import logging
-import logging.handlers
+from logging.handlers import RotatingFileHandler
 import time
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
-logfile = logging.handlers.RotatingFileHandler(
+logfile = RotatingFileHandler(
     "logfile_with_rotation.log", maxBytes=10, backupCount=3
 )
 logfile.setLevel(logging.DEBUG)
