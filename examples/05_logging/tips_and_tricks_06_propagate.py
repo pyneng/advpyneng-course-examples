@@ -1,22 +1,27 @@
 import logging
 from pprint import pprint
 from netmiko import Netmiko
+from rich import inspect
 
 
-logging.getLogger("netmiko").setLevel(logging.WARNING)
-logging.getLogger("paramiko").setLevel(logging.INFO)
+logging.getLogger("netmiko").propagate = False
+# logging.getLogger("paramiko.transport").propagate = False
+
 p = logging.getLogger("paramiko")
-p.setLevel(logging.INFO)
+p.setLevel(logging.DEBUG)
 p.propagate = False
-fmt = logging.Formatter(
-    "{asctime} {name} {levelname:10} {message}", style="{"
-)
 
 stderr = logging.StreamHandler()
 stderr.setLevel(logging.DEBUG)
-stderr.setFormatter(fmt)
-
+stderr.setFormatter(
+    logging.Formatter(
+        "{asctime} {name} {levelname:10} {message}",
+        style="{",
+        datefmt="%H:%M:%S",
+    )
+)
 p.addHandler(stderr)
+
 
 logging.basicConfig(
     format="{asctime} {name:20} {levelname:8} {message}",
