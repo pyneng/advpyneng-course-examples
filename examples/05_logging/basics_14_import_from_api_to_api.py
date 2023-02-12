@@ -4,13 +4,10 @@ from basics_14_code import func
 from rich import inspect
 
 
-
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
-fmt = logging.Formatter(
-    "{asctime} {name} {levelname:10} {message}", style="{"
-)
+fmt = logging.Formatter("{asctime} {name} {levelname:10} {message}", style="{")
 
 stderr = logging.StreamHandler()
 stderr.setLevel(logging.DEBUG)
@@ -23,8 +20,8 @@ def remove_stream_handler(logger):
     for h in logger.handlers:
         if isinstance(h, logging.StreamHandler):
             logger.removeHandler(h)
-    #if not logger.handlers:
-        #logger.addHandler(logging.NullHandler())
+    # if not logger.handlers:
+    #     logger.addHandler(logging.NullHandler())
 
 
 def replace_handlers(logger, new_handlers):
