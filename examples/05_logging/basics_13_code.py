@@ -2,7 +2,7 @@ import logging
 
 logging.basicConfig(
     level=logging.DEBUG,
-    format="{asctime} {name} {levelname:10} {module:30} {message}",
+    format="{name} {levelname:10} {module:45} {message}",
     style="{",
     datefmt="%H:%M:%S"
 )

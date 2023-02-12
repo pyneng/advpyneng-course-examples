@@ -1,0 +1,5 @@
+root                 INFO                 12 message info
+root                 WARNING              13 message warning
+basics_14_code       DEBUG                16 MSG1
+basics_14_code       INFO                 17 MSG2
+basics_14_code       WARNING              18 MSG3

@@ -4,9 +4,10 @@ from basics_13_code import func
 
 logging.basicConfig(
     level=logging.INFO,
-    format="{asctime} {levelname:10} {name} {module} {message}",
+    format="{asctime} {levelname:10} {name} {message}",
     style="{",
-    force=True
+    datefmt="%H:%M:%S",
+    force=True,
 )
 
 logging.debug("message debug")
