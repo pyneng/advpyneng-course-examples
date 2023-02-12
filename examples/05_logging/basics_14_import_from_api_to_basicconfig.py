@@ -6,7 +6,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="{asctime} {levelname:10} {name} {module} {message}",
     style="{",
-    force=True
+    force=True,
 )
 
 logging.debug("message debug")
