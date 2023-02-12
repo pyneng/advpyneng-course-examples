@@ -1,6 +1,7 @@
 import logging
 from collections.abc import Iterable
 from basics_14_code import func
+from rich import inspect
 
 
 
@@ -18,18 +19,31 @@ stderr.setFormatter(fmt)
 log.addHandler(stderr)
 
 
+def remove_stream_handler(logger):
+    for h in logger.handlers:
+        if isinstance(h, logging.StreamHandler):
+            logger.removeHandler(h)
+    #if not logger.handlers:
+        #logger.addHandler(logging.NullHandler())
+
+
 def replace_handlers(logger, new_handlers):
     if not isinstance(new_handlers, Iterable):
         new_handlers = [new_handlers]
-    handlers = logger.handlers
-    for h in handlers:
+    for h_new in new_handlers:
+        if not isinstance(h_new, logging.Handler):
+            raise ValueError
+    for h in logger.handlers:
         logger.removeHandler(h)
     for h_new in new_handlers:
         logger.addHandler(h_new)
 
 
 log_14 = logging.getLogger("basics_14_code")
-replace_handlers(log_14, stderr)
+# replace_handlers(log_14, stderr)
+inspect(log_14)
+remove_stream_handler(log_14)
+inspect(log_14)
 # log_14 = logging.getLogger("basics_14_code")
 # log_14.setLevel(logging.DEBUG)
 # handlers = log_14.handlers

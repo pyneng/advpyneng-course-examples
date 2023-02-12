@@ -1,4 +1,6 @@
 import logging
+from rich import inspect
+
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -11,11 +13,10 @@ stderr.setFormatter(fmt)
 
 logger.addHandler(stderr)
 
-
 def func():
-    logger.debug("Сообщение уровня debug")
-    logger.info("Сообщение уровня info")
-    logger.warning("Сообщение уровня warning")
+    logger.debug("message debug")
+    logger.info("message info")
+    logger.warning("message warning")
 
 
 if __name__ == "__main__":
