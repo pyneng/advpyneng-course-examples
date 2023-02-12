@@ -1,6 +1,7 @@
 import logging
 from rich import inspect
 
+logging.basicConfig()
 
 logger = logging.getLogger("test")
 #logger.setLevel(logging.DEBUG)
@@ -13,6 +14,7 @@ stderr.setLevel(logging.DEBUG)
 stderr.setFormatter(fmt)
 
 logger.addHandler(stderr)
+logger.propagate = False
 print(f"{logger.getEffectiveLevel()=}")
 
 
