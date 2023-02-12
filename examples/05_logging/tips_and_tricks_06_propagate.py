@@ -5,10 +5,18 @@ from netmiko import Netmiko
 
 logging.getLogger("netmiko").setLevel(logging.WARNING)
 logging.getLogger("paramiko").setLevel(logging.INFO)
-n = logging.getLogger("netmiko").setLevel(logging.WARNING)
 p = logging.getLogger("paramiko")
 p.setLevel(logging.INFO)
 p.propagate = False
+fmt = logging.Formatter(
+    "{asctime} {name} {levelname:10} {message}", style="{"
+)
+
+stderr = logging.StreamHandler()
+stderr.setLevel(logging.DEBUG)
+stderr.setFormatter(fmt)
+
+p.addHandler(stderr)
 
 logging.basicConfig(
     format="{asctime} {name:20} {levelname:8} {message}",
