@@ -1,3 +1,0 @@
-basics_14_code_file  DEBUG      MSG1
-basics_14_code_file  INFO       MSG2
-basics_14_code_file  WARNING    MSG3
