@@ -1,17 +1,5 @@
 import logging
-
-
-class MessageFilter(logging.Filter):
-    def __init__(self, contains):
-        self.contains = contains
-
-    def filter(self, record):
-        return self.contains in record.msg
-
-
-class DebugOnlyFilter(logging.Filter):
-    def filter(self, record):
-        return record.levelno == logging.DEBUG
+from rich import inspect
 
 
 class LevelFilter(logging.Filter):
@@ -22,11 +10,30 @@ class LevelFilter(logging.Filter):
         return record.levelno == self.level
 
 
-class LevelAndMessageFilter(logging.Filter):
-    def __init__(self, level, message):
-        self.level = LevelFilter(level)
-        self.message = MessageFilter(message)
+class MsgFilter(logging.Filter):
+    def __init__(self, contains_text):
+        self.contains_text = contains_text
 
     def filter(self, record):
-        return self.level.filter(record) and self.message.filter(record)
+        return self.contains_text in record.msg
 
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+logger.addFilter(LevelFilter(logging.DEBUG))
+logger.addFilter(MsgFilter("python"))
+inspect(logger)
+
+stderr = logging.StreamHandler()
+stderr.setLevel(logging.DEBUG)
+stderr.setFormatter(
+    logging.Formatter(
+        "{asctime} {name} {levelname:10} {message}", datefmt="%H:%M:%S", style="{"
+    )
+)
+logger.addHandler(stderr)
+
+
+for word in ["python", "ruby", "perl"]:
+    logger.info(f"MSG {word}")
+    logger.debug(f"MSG {word}")

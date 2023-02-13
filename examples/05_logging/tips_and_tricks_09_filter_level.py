@@ -1,9 +1,11 @@
 import logging
+from rich import inspect
 
 
 class DebugOnlyFilter(logging.Filter):
     def filter(self, record):
-        return record.levelno == logging.DEBUG
+        # inspect(record)
+        return record.levelname == "DEBUG"
 
 
 class LevelFilter(logging.Filter):
@@ -16,30 +18,27 @@ class LevelFilter(logging.Filter):
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
-# logger.addFilter(LevelFilter(logging.DEBUG))
+logger.addFilter(LevelFilter(logging.INFO))
+# logger.addFilter(DebugOnlyFilter())
 
-### stderr
-console = logging.StreamHandler()
-console.setLevel(logging.DEBUG)
-# console.addFilter(LevelFilter(logging.DEBUG))
-formatter = logging.Formatter(
-    "{asctime} {name} {levelname} {message}", datefmt="%H:%M:%S", style="{"
+stderr = logging.StreamHandler()
+stderr.setLevel(logging.DEBUG)
+stderr.setFormatter(
+    logging.Formatter(
+        "{asctime} {name} {levelname:10} {message}", datefmt="%H:%M:%S", style="{"
+    )
 )
-console.setFormatter(formatter)
-logger.addHandler(console)
-
+# stderr.addFilter(DebugOnlyFilter())
+logger.addHandler(stderr)
 
 ### File
-logfile = logging.FileHandler("logfile3.log")
+logfile = logging.FileHandler("logfile09.log")
 logfile.setLevel(logging.DEBUG)
 formatter = logging.Formatter("{asctime} {name} {levelname} {message}", style="{")
 logfile.setFormatter(formatter)
-
 logger.addHandler(logfile)
 
-## messages
-logger.debug("Сообщение уровня debug")
-logger.debug("Сообщение уровня debug. test1")
-logger.debug("Сообщение уровня debug. test2")
-logger.info("Сообщение уровня info")
-logger.warning("Сообщение уровня warning")
+
+for num in range(1, 11):
+    logger.info(f"MSG {num}")
+    logger.debug(f"MSG {num}")

@@ -1,40 +1,30 @@
 import logging
+from rich import inspect
 
 
-class MessageFilter(logging.Filter):
-    def __init__(self, contains):
-        self.contains = contains
+class MsgFilter(logging.Filter):
+    def __init__(self, contains_text):
+        self.contains_text = contains_text
 
     def filter(self, record):
-        return self.contains in record.msg
+        print(record)
+        return self.contains_text in record.msg
 
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
-# logger.addFilter(LevelFilter(logging.DEBUG))
+logger.addFilter(MsgFilter("python"))
 
-### stderr
-console = logging.StreamHandler()
-console.setLevel(logging.DEBUG)
-# console.addFilter(LevelFilter(logging.DEBUG))
-formatter = logging.Formatter(
-    "{asctime} {name} {levelname} {message}", datefmt="%H:%M:%S", style="{"
+stderr = logging.StreamHandler()
+stderr.setLevel(logging.DEBUG)
+stderr.setFormatter(
+    logging.Formatter(
+        "{asctime} {name} {levelname:10} {message}", datefmt="%H:%M:%S", style="{"
+    )
 )
-console.setFormatter(formatter)
-logger.addHandler(console)
+logger.addHandler(stderr)
 
 
-### File
-logfile = logging.FileHandler("logfile3.log")
-logfile.setLevel(logging.DEBUG)
-formatter = logging.Formatter("{asctime} {name} {levelname} {message}", style="{")
-logfile.setFormatter(formatter)
-
-logger.addHandler(logfile)
-
-## messages
-logger.debug("Сообщение уровня debug")
-logger.debug("Сообщение уровня debug. test1")
-logger.debug("Сообщение уровня debug. test2")
-logger.info("Сообщение уровня info")
-logger.warning("Сообщение уровня warning")
+for word in ["python", "ruby", "perl"]:
+    logger.info(f"MSG {word}")
+    logger.debug(f"MSG {word}")
