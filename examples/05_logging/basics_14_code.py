@@ -7,7 +7,7 @@ logger.setLevel(logging.DEBUG)
 stderr = logging.StreamHandler()
 stderr.setLevel(logging.DEBUG)
 stderr.setFormatter(
-    logging.Formatter("{name:20} {levelname:20} {message}", style="{")
+    logging.Formatter("{name:20} {levelname:10} {message}", style="{")
 )
 logger.addHandler(stderr)
 
