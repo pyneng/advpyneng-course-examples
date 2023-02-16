@@ -1,4 +1,3 @@
-from rich import inspect
 
 def check_passwd(user, passwd, min_len=8, unique_numbers=3):
     """
@@ -12,8 +11,6 @@ def check_passwd(user, passwd, min_len=8, unique_numbers=3):
         True: пароль прошел все проверки
         False: пароль не прошел одну из проверок
     """
-    user = str(user)
-    passwd = str(passwd)
     numbers = set("0123456789")
     if len(passwd) < min_len:
         return False

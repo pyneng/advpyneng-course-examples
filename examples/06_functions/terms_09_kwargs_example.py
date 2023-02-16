@@ -1,7 +1,5 @@
 from pprint import pprint
 
-# spec_sym=True, whitespace=False
-
 
 def check_passwd(user, passwd, min_len=8, unique_numbers=3):
     numbers = set("0123456789")

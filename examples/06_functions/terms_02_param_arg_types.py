@@ -1,8 +1,6 @@
 
-# обязательные параметры user passwd
-# необязательные параметры min_len, unique_numbers
 
-def check_passwd(user, passwd, min_len=8, unique_numbers=3):
+def check_passwd(user, passwd, min_len=8, unique_numbers=3, numbers):
     """
 	Проверяет пароль и возвращает True если пароль правильный и False иначе.
     Args:
@@ -14,8 +12,6 @@ def check_passwd(user, passwd, min_len=8, unique_numbers=3):
         True: пароль прошел все проверки
         False: пароль не прошел одну из проверок
     """
-    user = str(user)
-    passwd = str(passwd)
     numbers = set("0123456789")
     if len(passwd) < min_len:
         return False
@@ -27,8 +23,8 @@ def check_passwd(user, passwd, min_len=8, unique_numbers=3):
         return True
 
 
-print(check_passwd("user1", "pass3245word"))
-print(check_passwd("admin", "adminpass3565word", min_len=10))
-print(check_passwd("admin", "adminpass3565word", min_len=10, unique_numbers=3))
-print(check_passwd("admin", "adminpass3565word", min_len=10, 3))
-print(check_passwd(passwd="adminpass3565word", user="superadmin", 10))
+# print(check_passwd("user1", "pass3245word"))
+# print(check_passwd("admin", "adminpass3565word", min_len=10))
+# print(check_passwd("admin", "adminpass3565word", min_len=10, unique_numbers=3))
+# print(check_passwd("admin", "adminpass3565word", min_len=10, 3))
+# print(check_passwd(passwd="adminpass3565word", user="superadmin", 10))

@@ -15,11 +15,8 @@ username_passwd = [
 ]
 user_dict = {"username": "cisco", "password": "cisco"}
 
-# Python распаковывает словарь и передает его в функцию как ключевые аргументы.
-check_passwd(**user_dict)
+print(check_passwd(**user_dict))
+print(check_passwd(username="cisco", password="cisco"))
 
-# превращается в вызов вида
-check_passwd(username="cisco", password="cisco")
-
-for data in username_passwd:
-    print(check_passwd(**data))
+for info in username_passwd:
+    print(check_passwd(**info))
