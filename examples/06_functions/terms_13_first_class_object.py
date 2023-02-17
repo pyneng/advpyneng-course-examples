@@ -6,6 +6,7 @@ Python поддерживает:
 * возвращение функции как результата других функций
 * присваивание функций переменным, сохранение функций в структурах данных
 """
+from getpass import getpass
 from rich import inspect
 
 
@@ -17,6 +18,14 @@ def check_passwd(username, password, min_length=8, check_username=True):
     else:
         return True
 
+
+def select_request_function(param):
+    choice = {
+        "username": input,
+        "password": getpass,
+        "secret": getpass,
+    }
+    return choice.get(param, input)
 
 check_passwd.test = True
 inspect(check_passwd, dunder=True)
