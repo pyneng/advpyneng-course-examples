@@ -30,3 +30,17 @@ def select_request_function(param):
 check_passwd.test = True
 inspect(check_passwd, dunder=True)
 inspect(check_passwd.__code__, dunder=True)
+
+
+class CiscoSSH:
+    def __init__(self, **device_params):
+        params = {
+            "username": input,
+            "password": getpass,
+            "secret": getpass,
+        }
+        for param in params:
+            if not param in device_params:
+                function = params[param]
+                device_params[param] = function(f"{param.capitalize()}: ")
+
