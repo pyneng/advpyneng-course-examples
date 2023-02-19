@@ -23,8 +23,9 @@ async def run_all(devices, command):
 
 
 if __name__ == "__main__":
-    with open("devices_scrapli_telnet.yaml") as f:
+    with open("devices_scrapli_alg.yaml") as f:
         devices = yaml.safe_load(f)
+    pprint(devices)
     output = asyncio.run(run_all(devices, "show ip int br"))
     pprint(output)
 
