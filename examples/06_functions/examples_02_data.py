@@ -42,3 +42,27 @@ device_list = [
 vlans = [("IT_VLAN", 320), ("Mngmt_VLAN", 99), ("User_VLAN", 1010), ("DB_VLAN", 11)]
 
 words = ["one", "two", "list", "instance", "dict", "TEST", "DICT"]
+
+dev_list = [
+    {
+        "device_type": "cisco_ios",
+        "host": "192.168.100.1",
+        "username": "cisco",
+        "password": "cisco",
+        "secret": "cisco",
+    },
+    {
+        "device_type": "cisco_ios",
+        "host": "192.168.100.2",
+        "username": "cisco",
+        "password": "cisco",
+        "secret": "cisco",
+    },
+    {
+        "device_type": "cisco_ios",
+        "host": "192.168.100.3",
+        "username": "cisco",
+        "password": "cisco",
+        "secret": "cisco",
+    },
+]
