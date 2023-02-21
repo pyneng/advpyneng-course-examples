@@ -1,4 +1,4 @@
-from netmiko import ConnectHandler
+from netmiko import Netmiko
 
 device_params = {
     "device_type": "cisco_ios",
@@ -10,7 +10,7 @@ device_params = {
 
 
 def netmiko_ssh(**params_dict):
-    ssh = ConnectHandler(**params_dict)
+    ssh = Netmiko(**params_dict)
     ssh.enable()
 
     def send_show_command(command):

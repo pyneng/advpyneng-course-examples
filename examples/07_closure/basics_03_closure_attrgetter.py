@@ -1,6 +1,6 @@
 
 
-def attrgetter(attr):
-    def get_attr_from_obj(obj):
+def attr_getter(attr):
+    def inner(obj):
         return getattr(obj, attr)
-    return get_attr_from_obj
+    return inner
