@@ -1,16 +1,19 @@
+import io
 from pprint import pprint
 
 
 def parse_file(filename):
-    def get_clean_lines(open_file):
+    def get_lines(open_file):
         lines = [line.strip() for line in open_file if line.strip()]
-        return lines
+        return line
 
     if isinstance(filename, str):
         with open(filename) as f:
-            return get_clean_lines(f)
+            return get_lines(f)
+    elif isinstance(filename, io.TextIOBase):
+        return get_lines(filename)
     else:
-        return get_clean_lines(filename)
+        raise TypeError
 
 
 
