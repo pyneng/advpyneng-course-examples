@@ -1,6 +1,6 @@
 from netmiko import Netmiko
 
-device_params = {
+r1 = {
     "device_type": "cisco_ios",
     "ip": "192.168.100.1",
     "username": "cisco",
@@ -10,11 +10,10 @@ device_params = {
 
 
 def netmiko_ssh(**params_dict):
-    ssh = Netmiko(**params_dict)
-    ssh.enable()
+    conn = Netmiko(**params_dict)
+    conn.enable()
 
-    def send_show_command(command):
-        return ssh.send_command(command)
+    def inner(command):
+        return conn.send_command(command)
+    return inner
 
-    netmiko_ssh.send_show_command = send_show_command
-    return send_show_command
