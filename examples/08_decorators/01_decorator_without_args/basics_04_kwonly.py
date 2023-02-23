@@ -1,14 +1,28 @@
 from functools import wraps
 
 
-
 def kwargs_only(func):
+    print(f"kwargs_only {func=}")
+
+    @wraps(func)
+    def inner(**kwargs):
+        """TEEEST"""
+        return func(**kwargs)
+
+    if inner.__doc__ is None:
+        inner.__doc__ = ""
+    inner.__doc__ += "\nФункция принимает только ключевые аргументы"
+    return inner
+
+
+
+def kwargs_only2(func):
     print(f"kwargs_only {func=}")
 
     @wraps(func)
     def inner(*args, **kwargs):
         if args:
-            raise TypeError("Keyword args only!")
+            raise TypeError("Функция принимает только ключевые аргументы")
         return func(**kwargs)
 
     return inner
