@@ -8,7 +8,7 @@ def kwargs_only(func):
     @wraps(func)
     def inner(*args, **kwargs):
         if args:
-            raise TypeError("Positional args only!")
+            raise TypeError("Keyword args only!")
         return func(**kwargs)
 
     return inner
