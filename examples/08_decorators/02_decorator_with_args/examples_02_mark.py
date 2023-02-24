@@ -13,11 +13,14 @@ def add_mark(**kwargs):
             # func.mark = True
             setattr(func, attr_name, value)
         return func
+
     return mark
+
 
 @add_mark(test=True)
 def f():
     pass
+
 
 # decorator = add_mark(test=True)
 # f = decorator(f)
@@ -25,7 +28,6 @@ def f():
 # print(f"{type(f)=}")
 #
 # f = add_mark(test=True)(f)
-
 
 
 # test_and_verbose = add_mark(test=True, verbose=True)

@@ -2,6 +2,7 @@ import paramiko
 import time
 from ex23_decorating_classes_add_new_method import add_pprint
 
+
 def verbose(func):
     def inner(*args, **kwargs):
         print(f"Вызываю функцию {func.__name__}")

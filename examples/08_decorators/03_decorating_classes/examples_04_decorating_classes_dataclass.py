@@ -1,4 +1,3 @@
-
 def create_init(cls):
     attrs = list(cls.__annotations__.keys())
     init = f"def __init__(self, {', '.join(attrs)}):\n"
@@ -29,14 +28,15 @@ def my_dataclass(cls):
     cls.__repr__ = create_repr(cls)
     return cls
 
+
 @my_dataclass
 class IPAddress:
     ip: str
     mask: int
+
 
 @my_dataclass
 class Book:
     title: str
     price: int
     quantity: int
-

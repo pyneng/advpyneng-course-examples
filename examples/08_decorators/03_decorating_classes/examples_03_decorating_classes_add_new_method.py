@@ -1,5 +1,6 @@
 from rich import print as rprint
 
+
 def _pprint(self, methods=False):
     attrs = vars(self)
     rprint(attrs)
@@ -29,4 +30,3 @@ class IPAddress:
 
     def bin_mask(self):
         return "1" * self.mask + "0" * (32 - self.mask)
-

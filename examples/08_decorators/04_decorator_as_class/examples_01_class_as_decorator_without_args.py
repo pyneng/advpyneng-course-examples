@@ -1,5 +1,6 @@
 def verbose(func):
     print("Декорируем")
+
     def inner(*args, **kwargs):
         print(f"У функции {func.__name__} такие аргументы")
         print(f"{args=}")
@@ -7,6 +8,7 @@ def verbose(func):
         result = func(*args, **kwargs)
         print(f"{result=}")
         return result
+
     return inner
 
 
@@ -21,5 +23,5 @@ class Verbose:
         return self.func(*args, **kwargs)
 
 
-#upper = Verbose(upper)
-#upper("a")
+# upper = Verbose(upper)
+# upper("a")
