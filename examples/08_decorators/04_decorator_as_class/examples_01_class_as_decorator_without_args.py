@@ -1,12 +1,14 @@
-def verbose(func):
-    print("Декорируем")
+from functools import wraps, update_wrapper
 
+
+def verbose(func):
+    print(f"verbose {func=}")
+
+    @wraps(func)
     def inner(*args, **kwargs):
-        print(f"У функции {func.__name__} такие аргументы")
-        print(f"{args=}")
-        print(f"{kwargs=}")
+        print(f"inner {args=} {kwargs=}")
         result = func(*args, **kwargs)
-        print(f"{result=}")
+        print(f"inner {result=}")
         return result
 
     return inner
@@ -14,14 +16,26 @@ def verbose(func):
 
 class Verbose:
     def __init__(self, func):
-        print("Декорируем")
+        print(f"verbose {func=}")
+        update_wrapper(self, func)
         self.func = func
 
     def __call__(self, *args, **kwargs):
-        print("__call__")
-        print(args, kwargs)
-        return self.func(*args, **kwargs)
+        print(f"__call__ {args=} {kwargs=}")
+        result = self.func(*args, **kwargs)
+        print(f"__call__ {result=}")
+        return result
 
 
-# upper = Verbose(upper)
-# upper("a")
+
+@Verbose
+def lower(string):
+    print(f"lower {string=}")
+    return string.lower()
+
+# lower = Verbose(lower)
+
+
+def capitalize(string):
+    print(f"capitalize {string=}")
+    return string.capitalize()
