@@ -1,25 +1,19 @@
-from rich import print as rprint
+from rich import inspect
 
 
-def _pprint(self, methods=False):
-    attrs = vars(self)
-    rprint(attrs)
-    all_methods = vars(type(self))
-    methods_dict = {
-        name: method
-        for name, method in all_methods.items()
-        if not name.startswith("__") and callable(method)
-    }
-    if methods:
-        rprint(methods_dict)
+def _inspect(self, cls=False, methods=False, dunder=False):
+    if cls:
+        inspect(type(self), methods=methods)
+    else:
+        inspect(self, methods=methods)
 
 
-def add_pprint(cls):
-    cls.pprint = _pprint
+def add_inspect(cls):
+    cls.inspect = _inspect
     return cls
 
 
-@add_pprint
+@add_inspect
 class IPAddress:
     def __init__(self, ip, mask):
         self.ip = ip
