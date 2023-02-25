@@ -1,11 +1,12 @@
 from rich import inspect
 
 
-def _inspect(self, cls=False, methods=False, dunder=False):
+def _inspect(self, cls=False, **kwargs):
+    """kwargs rich.inspect args"""
     if cls:
-        inspect(type(self), methods=methods)
+        inspect(type(self), **kwargs)
     else:
-        inspect(self, methods=methods)
+        inspect(self, **kwargs)
 
 
 def add_inspect(cls):
