@@ -6,11 +6,11 @@ def d_1(func):
 
     def inner1(*args, **kwargs):
         print(f"Start inner1 {func.__name__=}")
-        print("-" * 40)
+        print("1" * 40)
         result1 = func(*args, **kwargs)
         print(f"{result1=}")
-        print("-" * 40)
-        return result1 * 100
+        print("1" * 40)
+        return result1
 
     return inner1
 
@@ -20,17 +20,20 @@ def d_2(func):
 
     def inner2(*args, **kwargs):
         print(f"Start inner2 {func.__name__=}")
-        print(">" * 40)
+        print("2" * 40)
         result2 = func(*args, **kwargs)
         print(f"{result2=}")
-        print("<" * 40)
-        return result2 * 1000
+        print("2" * 40)
+        return result2
 
     return inner2
 
-
+@d_1
+@d_2
 def f():
-    pass
+    return 42
 
 
 # f = d_1(d_2(f))
+inner2 = d_2(f)
+inner1 = d_1(inner2)

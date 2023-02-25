@@ -30,10 +30,12 @@ def lower(string):
     return string.lower()
 
 
+@verbose
 def capitalize(string):
     print(f"capitalize {string=}")
     return string.capitalize()
 
 
+@verbose
 def sum(a, b):
     return a + b
