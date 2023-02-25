@@ -4,10 +4,13 @@ DEVICE_TYPE_CLASS_MAP = {}
 
 
 def register(cls):
-    DEVICE_TYPE_CLASS_MAP[cls.device_type] = cls.__name__
+    if not hasattr(cls, "device_type"):
+        raise TypeError("Декоратор работает только с классами с атрибутом device_type")
+    DEVICE_TYPE_CLASS_MAP[cls.device_type] = cls
     return cls
 
 
+# @register
 class CiscoIosBase:
     pass
 
@@ -26,6 +29,9 @@ class JuniperSSH:
 
     def __init__(self, ip, user, password):
         pass
+
+
+# JuniperSSH = register(JuniperSSH)
 
 
 pprint(DEVICE_TYPE_CLASS_MAP)
