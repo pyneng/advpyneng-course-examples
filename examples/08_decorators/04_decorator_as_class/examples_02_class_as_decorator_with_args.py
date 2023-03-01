@@ -1,31 +1,34 @@
-from functools import update_wrapper
+from functools import wraps, update_wrapper
 
 
 class Verbose:
-    def __init__(self, message):
-        self.message = message
+    def __init__(self, msg):
+        self.msg = msg
+        print("init verbose")
 
     def __call__(self, func):
-        print("Декорация")
+        print(f"{self.msg} verbose {func=}")
 
+        @wraps(func)
         def inner(*args, **kwargs):
-            print(self.message)
-            print(f"У функции {func.__name__} такие аргументы")
-            print(f"{args=}")
-            print(f"{kwargs=}")
+            print(f"__call__ {args=} {kwargs=}")
             result = func(*args, **kwargs)
-            print(f"{result=}")
+            print(f"__call__ {result=}")
             return result
 
-        update_wrapper(wrapper=inner, wrapped=func)
         return inner
 
 
-def upper(string):
-    return string.upper()
+@Verbose("hello")
+def lower(string):
+    print(f"lower {string=}")
+    return string.lower()
 
 
-decorator = Verbose("Hello")
-upper = decorator(upper)
-print(f"{upper('a')=}")
-print(upper)
+# decorator = Verbose("hello")
+# lower = decorator(lower)
+
+
+def capitalize(string):
+    print(f"capitalize {string=}")
+    return string.capitalize()

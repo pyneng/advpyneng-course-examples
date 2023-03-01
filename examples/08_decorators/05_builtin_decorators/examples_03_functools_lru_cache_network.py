@@ -1,9 +1,11 @@
 from functools import lru_cache
+from netmiko import netmiko
+
 
 
 @lru_cache
 def send_show_command(host, device_type, username, password, show):
-    with ConnectHandler(
+    with Netmiko(
         host=host, device_type=device_type, username=username, password=password
     ) as ssh:
         result = ssh.send_command(show)
