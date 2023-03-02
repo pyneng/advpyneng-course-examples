@@ -1,18 +1,17 @@
 from netmiko import ConnectHandler
 import yaml
 from pprint import pprint
-from collections.abc import Iterable
+from collections.abc import Sequence
 from functools import singledispatch
 
 
 @singledispatch
 def send_commands(command, device):
-    print("Все пропало")
     raise ValueError(f"Тип {type(command).__name__} не поддерживается")
 
 
 @send_commands.register(str)
-def _(show_command, device):
+def send_show_command(show_command, device):
     print("show")
     with ConnectHandler(**device) as ssh:
         ssh.enable()
@@ -20,8 +19,8 @@ def _(show_command, device):
     return result
 
 
-@send_commands.register(Iterable)
-def _(config_commands, device):
+@send_commands.register(Sequence)
+def send_config_commands(config_commands, device):
     print("config")
     with ConnectHandler(**device) as ssh:
         ssh.enable()
@@ -35,6 +34,6 @@ if __name__ == "__main__":
     with open("devices.yaml") as f:
         dev_list = yaml.safe_load(f)
         r1 = dev_list[0]
-    # send_commands(commands, r1)
+    send_commands(commands, r1)
     send_commands(show_command, r1)
-    send_commands(tuple(commands), r1)
+    # send_commands(tuple(commands), r1)

@@ -1,7 +1,7 @@
 from functools import wraps
 
 
-def mycache(maxsize=10):
+def mycache(function=None, *, maxsize=10):
     def decorator(func):
         print("mycache")
         cache_dict = {}
@@ -19,11 +19,10 @@ def mycache(maxsize=10):
 
         return inner
 
-    if isinstance(maxsize, int):
+    if function is None:
         return decorator
-    elif callable(maxsize):
-        func = maxsize
-        return decorator(func)
+    elif callable(function):
+        return decorator(function)
     else:
         raise TypeError("...")
 

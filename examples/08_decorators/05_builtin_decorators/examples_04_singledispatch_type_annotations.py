@@ -20,7 +20,7 @@ def _(show_command: str, device):
 
 
 @send_commands.register
-def _(config_commands: Sequence, device):
+def _(config_commands: Sequence[str], device):
     print("config")
     with Netmiko(**device) as ssh:
         ssh.enable()
