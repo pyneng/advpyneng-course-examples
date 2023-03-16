@@ -10,7 +10,7 @@ class Task:
             self.due = datetime.strptime(due, "%d/%m/%Y").date()
 
     def __str__(self):
-        return f"{self.__class__.__name__}({'self.title'})"
+        return f"{self.__class__.__name__}('{self.title}')"
 
     def __repr__(self):
         return f"<{self.__class__.__name__} title='{self.title}' due={self.due}>"
