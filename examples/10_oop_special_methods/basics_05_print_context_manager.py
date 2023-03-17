@@ -15,7 +15,7 @@ class SuppressException:
     def __exit__(self, exc_type, exc_value, traceback):
         print(f"__exit__ {exc_type=} {exc_value=} {traceback=}")
         if exc_type in self.exceptions:
-            print(f"Suppressing exception {exc_type}...")
+            print(f"Suppressing exception {exc_value}...")
             self.stats["suppressed"] += 1
             return True
         else:
