@@ -59,10 +59,11 @@ class CiscoSSH:
 
 
 if __name__ == "__main__":
-    # r1 = CiscoSSH("192.168.100.1", "cisco", "cisco", "cisco")
-    # out = r1.send_show_command("sh clock")
-    # pprint(out)
-    # r1.close()
+    r1 = CiscoSSH("192.168.100.1", "cisco", "cisco", "cisco")
+    out = r1.send_show_command("sh clock")
+    pprint(out)
+    r1.close()
+
 
     with CiscoSSH("192.168.100.1", "cisco", "cisco", "cisco") as r1:
         out = r1.send_show_command("sh clock")
