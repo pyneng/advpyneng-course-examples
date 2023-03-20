@@ -1,4 +1,5 @@
-class MyRepeat:
+
+class Repeat:
     def __init__(self, value):
         self.value = value
 
