@@ -25,18 +25,6 @@ class CiscoTelnet:
         time.sleep(1)
         self._telnet.read_very_eager()
 
-    def close(self):
-        self._telnet.close()
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        self._telnet.close()
-
-    def __repr__(self):
-        return f"<CiscoTelnet host={self.host}>"
-
     def _write_line(self, line):
         self._telnet.write(line.encode("utf-8") + b"\n")
 
@@ -62,6 +50,18 @@ class CiscoTelnet:
             return command_output
         else:
             return [dict(zip(cli_table.header, row)) for row in cli_table]
+
+    def close(self):
+        self._telnet.close()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self._telnet.close()
+
+    def __repr__(self):
+        return f"<CiscoTelnet host={self.host}>"
 
 
 

@@ -32,21 +32,6 @@ class CiscoTelnet:
     def __repr__(self):
         return f"<CiscoTelnet ip={self.ip}>"
 
-    @staticmethod
-    def _parse_show(command, command_output, index_file="index", templates="templates"):
-        attributes = {"Command": command}
-        cli_table = clitable.CliTable(index_file, templates)
-        cli_table.ParseCmd(command_output, attributes)
-        return [dict(zip(cli_table.header, row)) for row in cli_table]
-
-    @classmethod
-    def prompt_params(cls, ip):
-        params = {"ip": ip}
-        for param in ("username", "password", "enable_password"):
-            output = input(f"{param.capitalize()}: ")
-            params[param] = output
-        return cls(**params)
-
     @property
     def config(self):
         if not self._config:
@@ -69,12 +54,6 @@ class CiscoTelnet:
                 ["interface loop0", f"ip address {new_ip} 255.255.255.255"]
             )
             self._mngmt_ip = new_ip
-
-    def send_show_command(self, command):
-        self._telnet.write(command.encode("utf-8") + b"\n")
-        output = self._telnet.read_until(b"#").decode("utf-8")
-        # time.sleep(5)
-        return output
 
     def send_config_commands(self, commands):
         if type(commands) == str:

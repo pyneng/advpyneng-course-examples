@@ -76,7 +76,6 @@ if __name__ == "__main__":
     }
     with CiscoTelnet(**r1_params) as r1:
         pprint(r1.send_show_command("sh ip int br", parse=True), width=120)
-        # pprint(r1.send_show_command("sh int desc", parse=True), width=120)
-
         output = r1.send_show_command("sh ip int br")
+
     pprint(parse_show("sh ip int br", output), width=120)
