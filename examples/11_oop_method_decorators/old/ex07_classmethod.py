@@ -32,12 +32,6 @@ class CiscoTelnet:
         time.sleep(1)
         self._telnet.read_very_eager()
 
-    @classmethod
-    def from_prompt(cls, ip):
-        params = {"ip": ip}
-        for p in ("username", "password"):
-            params[p] = input(f"{p.upper()}: ")
-        return cls(**params)
 
     @classmethod
     def from_envvars(cls, prefix="CISCO_"):
