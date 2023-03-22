@@ -1,0 +1,4 @@
+Template, Hostname, Vendor, Command
+sh_cdp_n_d.txt, .*, cisco_ios, sh[[ow]] cdp ne[[ighbors]] de[[tail]]
+sh_ip_int_br.txt, .*, cisco_ios, sh[[ow]] ip int[[erface]] br[[ief]]
+

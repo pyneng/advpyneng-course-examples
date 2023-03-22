@@ -7,6 +7,20 @@ from textfsm import clitable
 from textfsm.clitable import CliTableError
 
 
+@staticmethod
+def parse_show(
+    command, command_output, index_file="index", templates="templates"
+):
+    attributes = {"Command": command}
+    cli_table = clitable.CliTable(index_file, templates)
+    try:
+        cli_table.ParseCmd(command_output, attributes)
+    except CliTableError:
+        return command_output
+    else:
+        return [dict(zip(cli_table.header, row)) for row in cli_table]
+
+
 class CiscoTelnet:
     def __init__(self, host, username, password, secret):
         print("__init__")
@@ -50,19 +64,7 @@ class CiscoTelnet:
         else:
             return command_output
 
-    @staticmethod
-    def _parse_show(
-        command, command_output, index_file="index", templates="templates"
-    ):
-        attributes = {"Command": command}
-        cli_table = clitable.CliTable(index_file, templates)
-        try:
-            cli_table.ParseCmd(command_output, attributes)
-        except CliTableError:
-            return command_output
-        else:
-            return [dict(zip(cli_table.header, row)) for row in cli_table]
-
+    _parse_show = parse_show
 
 
 if __name__ == "__main__":
@@ -74,7 +76,7 @@ if __name__ == "__main__":
     }
     with CiscoTelnet(**r1_params) as r1:
         pprint(r1.send_show_command("sh ip int br", parse=True), width=120)
-        pprint(r1.send_show_command("sh int desc", parse=True), width=120)
+        # pprint(r1.send_show_command("sh int desc", parse=True), width=120)
 
-        # output = r1.send_show_command("sh ip int br")
-    # pprint(CiscoTelnet._parse_show("sh ip int br", output), width=120)
+        output = r1.send_show_command("sh ip int br")
+    pprint(parse_show("sh ip int br", output), width=120)

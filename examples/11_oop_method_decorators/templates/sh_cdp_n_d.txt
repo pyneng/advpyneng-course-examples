@@ -1,0 +1,18 @@
+Value Filldown local_name (\S+)
+Value Required remote_name (\S+)
+Value remote_ip (\S+)
+Value remote_platform (.+)
+Value remote_ios (\S+)
+Value List remote_mngmt_ip (\S+)
+
+Start
+ ^${local_name}[#>]
+ ^Device ID: ${remote_name}
+ ^Entry address -> EntryIP
+ ^Cisco IOS Software.+Version ${remote_ios},
+ ^ +IP address: ${remote_mngmt_ip}
+ ^---+ -> Record
+
+EntryIP
+ ^ +IP address: ${remote_ip}
+ ^Platform: ${remote_platform}, -> Start

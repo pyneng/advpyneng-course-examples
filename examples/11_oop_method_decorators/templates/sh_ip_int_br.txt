@@ -1,0 +1,7 @@
+Value intf (\S+)
+Value ip (\S+)
+Value status (up|down|administratively down)
+Value protocol (up|down)
+
+Start
+ ^${intf} +${ip} +\w+ +\w+ +${status} +${protocol} -> Record
