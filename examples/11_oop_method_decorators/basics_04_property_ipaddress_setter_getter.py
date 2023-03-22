@@ -1,19 +1,18 @@
+
 class IPAddress:
     def __init__(self, ip, mask):
         self.ip = ip
+        self._mask = None
         self.set_mask(mask)
 
     def get_mask(self):
-        print("get")
-        return self._private_mask
+        print("get_mask")
+        return self._mask
 
     def set_mask(self, new_mask):
-        print("set")
+        print("set_mask")
         if not isinstance(new_mask, int):
             raise TypeError("Маска должна быть числом")
-        if new_mask not in range(33):
-            raise ValueError("Маска должна быть в диапазоне 0-32")
-        self._private_mask = new_mask
-
-
-ip1 = IPAddress("10.1.1.1", 24)
+        if new_mask not in range(0, 33):
+            raise ValueError("Значение маски должно быть от 0 до 32")
+        self._mask = new_mask
