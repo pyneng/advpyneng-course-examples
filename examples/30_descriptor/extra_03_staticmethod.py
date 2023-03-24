@@ -9,3 +9,12 @@ class StaticMethod:
 
     def __call__(self, *args, **kwds):
         return self.f(*args, **kwds)
+
+
+class Dummy:
+    @staticmethod
+    def info(arg1):
+        pass
+
+    info = staticmethod(info)
+
