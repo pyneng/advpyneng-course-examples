@@ -1,14 +1,16 @@
+
+
 class Number:
     def __set_name__(self, owner, name):
-        print(f"set_name {owner=} {name=}")
+        print("__set_name__")
         self.attr_name = "_" + name
 
-    def __get__(self, instance, cls=None):
-        print(f"__get__  {instance=} {cls=}")
+    def __get__(self, instance, cls):
+        print("__get__")
         return getattr(instance, self.attr_name)
 
     def __set__(self, instance, value):
-        print(f"__set__  {instance=} {value=}")
+        print("__set__")
         if not isinstance(value, (int, float)):
             raise TypeError("Значение должно быть числом")
         if value < 0:
@@ -24,8 +26,4 @@ class Book:
         self.title = title
         self.price = price
         self.quantity = quantity
-
-    @property
-    def total(self):
-        return round(self.price * self.quantity, 2)
 
