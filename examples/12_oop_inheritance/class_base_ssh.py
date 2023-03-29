@@ -30,35 +30,24 @@ class BaseSSH:
     def _send_line(self, command):
         self._ssh.send(f"{command}\n")
 
-    def _read_until_regex(self, regex):
-        output = ""
-        self._ssh.settimeout(self.read_timeout)
-        while True:
-            try:
-                time.sleep(self.pause)
-                part = self._ssh.recv(self.max_read).decode("utf-8")
-                output += part
-                match = re.search(regex, output)
-                if match:
-                    break
-            except OSError:
-                break
-        return output.replace("\r\n", "\n")
-
-    def send_show_command(self, command):
+    def _send_and_read(self, command):
         self._send_line(command)
-        time.sleep(1)
+        time.sleep(self.pause)
         result = self._ssh.recv(self.max_read).decode("utf-8")
         return result
+
+    def send_show_command(self, command):
+        output = self._send_and_read(command)
+        return output
 
     def send_config_commands(self, commands):
         if isinstance(commands, str):
             commands = [commands]
+        commands = [*commands]
+        output = ""
         for command in commands:
-            self._ssh.send(command + "\n")
-            time.sleep(self.pause)
-        result = self._ssh.recv(self.max_read).decode("utf-8")
-        return result
+            output += self._send_and_read(command)
+        return output
 
     def close(self):
         self._ssh.close()
