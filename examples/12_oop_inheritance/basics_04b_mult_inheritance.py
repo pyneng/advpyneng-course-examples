@@ -5,6 +5,9 @@ class Base:
     def __init__(self, name):
         self.name = name
 
+    def __repr__(self):
+        return f"<{type(self).__name__} {self.name}>"
+
 
 class Parent1:
     def __init__(self, name, color="green"):
@@ -13,19 +16,14 @@ class Parent1:
 
     def info(self):
         print("Parent1.info")
-
-    def method1(self):
-        print(f"[{self.color}]Parent1 method1")
+        print(f"[{self.color}]Parent1 {name}")
 
 
 class Parent2:
     def __init__(self, name, upper=True):
-        self.name = name
+        self.name = name.upper() if upper else name
         self.upper = upper
 
     def info(self):
         print("Parent2.info")
-
-    def method2(self):
-        name = self.name.upper() if self.upper else self.name
-        print(f"Parent2 method2 {name}")
+        print(f"Parent2 {self.name}")
