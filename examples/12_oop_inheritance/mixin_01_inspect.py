@@ -1,7 +1,7 @@
 from rich import inspect
 
 class InspectMixin:
-    def _inspect(self, cls=False, **kwargs):
+    def inspect(self, cls=False, **kwargs):
         """kwargs rich.inspect args"""
         if cls:
             inspect(type(self), **kwargs)
