@@ -24,9 +24,7 @@ class Task:
         if not isinstance(other, Task):
             return NotImplemented
         return (self.title, self.description, self.due) == (
-            other.title,
-            other.description,
-            other.due,
+            other.title, other.description, other.due,
         )
 
     def __str__(self):

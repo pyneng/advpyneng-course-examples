@@ -1,8 +1,9 @@
 from tabulate import tabulate
 from class_task import Task
+from collections.abc import MutableSequence
 
 
-class TodoList:
+class TodoList(MutableSequence):
     def __init__(self, tasks=None):
         if tasks is None:
             self._tasks = []
@@ -19,22 +20,19 @@ class TodoList:
         return tabulate(table, headers="keys")
 
     def __getitem__(self, index):
-        print(f"__getitem__ {index=}")
         return self._tasks[index]
 
     def __setitem__(self, index, value):
-        print(f"__setitem__ {index=} {value=}")
         self._tasks[index] = value
 
     def __delitem__(self, index):
-        print(f"__delitem__ {index=}")
         del self._tasks[index]
 
     def __len__(self):
         return len(self._tasks)
 
-    def append(self, item):
-        self._tasks.append(item)
+    def insert(self, index, item):
+        self._tasks.insert(index, item)
 
 
 t1 = Task("task1", due="25/03/2023")
