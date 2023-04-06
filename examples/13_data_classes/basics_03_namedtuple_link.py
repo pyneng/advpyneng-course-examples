@@ -1,20 +1,13 @@
-from typing import NamedTuple
 from pprint import pprint
-from collections import UserDict
+from typing import NamedTuple
 
 
 class Link(NamedTuple):
     device: str
     port: str
 
-
-class Topology(UserDict):
     def __str__(self):
-        top_str = ""
-        for l1, l2 in self.data.items():
-            top_str += f"{l1} <--> {l2}\n"
-        return top_str
-
+        return f"('{self.device}', '{self.port}')"
 
 top = {
     Link("R1", "Gi0/0"): Link("SW1", "Gi0/1"),
@@ -26,7 +19,4 @@ top = {
 }
 
 
-t1 = Topology(top)
 pprint(top)
-pprint(t1)
-print(t1)
