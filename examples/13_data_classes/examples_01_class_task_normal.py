@@ -16,7 +16,9 @@ class Task:
         print(f"Task __lt__ {self=} {other=}")
         if not isinstance(other, Task):
             return NotImplemented
-        return self.due < other.due
+        return (self.title, self.description, self.due) < (
+            other.title, other.description, other.due,
+        )
 
     def __eq__(self, other):  # ==
         print(f"Task __eq__ {self=} {other=}")
@@ -25,9 +27,6 @@ class Task:
         return (self.title, self.description, self.due) == (
             other.title, other.description, other.due,
         )
-
-    def __str__(self):
-        return f"{self.__class__.__name__}({'self.title'})"
 
     def __repr__(self):
         return f"<{self.__class__.__name__} title='{self.title}' due={self.due}>"
