@@ -1,5 +1,5 @@
 import re
-from rich import print as rprint
+from pprint import pprint
 
 
 def is_ignore_line(line, ignore_lines):
@@ -35,9 +35,8 @@ def convert_to_lower(iterable):
 
 if __name__ == "__main__":
     ignore_lines = ("duplex", "alias exec", "Current configuration", "service")
-    file_i = clean_config("config_r1.txt", ignore_lines)
-    filt_i = filter_lines(file_i, "^interface")
-    lower = convert_to_lower(filt_i)
+    cfg = clean_config("config_r1_short.txt", ignore_lines)
+    f_lines = filter_lines(cfg, "^interface|ip address")
+    lower = convert_to_lower(f_lines)
     for line in lower:
         print(line)
-
