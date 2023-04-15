@@ -27,7 +27,7 @@ def filter_lines(iterable, regex):
 
 def convert_to_lower(iterable):
     for line in iterable:
-        rprint(f"[red]LOWER {line}")
+        rprint(f"[violet]LOWER {line}")
         yield line.lower()
 
 
