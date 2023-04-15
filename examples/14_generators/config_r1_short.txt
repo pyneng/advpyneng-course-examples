@@ -1,0 +1,27 @@
+no ip domain lookup
+ip cef
+no ipv6 cef
+!
+interface Loopback0
+ ip address 10.1.1.1 255.255.255.255
+!
+interface Tunnel0
+ ip unnumbered Loopback0
+ tunnel mode mpls traffic-eng
+!
+interface Ethernet0/1
+ no ip address
+!
+interface Ethernet0/2
+ description To P_r9 Ethernet0/2
+ ip address 10.0.19.1 255.255.255.0
+!
+interface Ethernet0/3
+ description To sw1 Ethernet0/3
+ no ip address
+!
+interface Ethernet0/3.100
+ encapsulation dot1Q 100
+!
+alias configure sh do sh
+alias exec ospf sh run | s ^router ospf
