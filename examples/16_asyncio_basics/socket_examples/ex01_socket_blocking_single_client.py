@@ -9,7 +9,7 @@ def create_server(address, port):
     return server_socket
 
 
-server_socket = create_server("localhost", 9000)
+server_socket = create_server("localhost", 8080)
 
 
 try:
@@ -20,10 +20,10 @@ try:
 
     client_data = b""
 
-    while b"\n" not in client_data:
-        data = client_socket.recv(1)
-        print(f"{data=}")
-        client_data += data
+    while b"close" not in client_data:
+        part = client_socket.recv(1)
+        print(f"{part=}")
+        client_data += part
     print(f"{client_data=}")
 
     client_socket.send(client_data.upper())
