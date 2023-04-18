@@ -18,15 +18,13 @@ try:
     print(f"{client_socket=}")
     print(f"{client_address=}")
 
-    client_data = b""
+    while True:
+        data = client_socket.recv(100)
+        print(f"{data=}")
+        client_socket.send(data.upper())
+        if b"close" in data:
+            break
 
-    while b"close" not in client_data:
-        part = client_socket.recv(1)
-        print(f"{part=}")
-        client_data += part
-    print(f"{client_data=}")
-
-    client_socket.send(client_data.upper())
     client_socket.close()
 finally:
     server_socket.close()
