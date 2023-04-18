@@ -4,7 +4,7 @@ import time
 
 def accept(server_socket):
     client_socket, client_address = server_socket.accept()
-    client_socket.setblocking(False) # non-blocking
+    client_socket.setblocking(False)  # non-blocking
     print(f"{client_socket=}")
     print(f"{client_address=}")
     client_sockets_list.append(client_socket)
@@ -12,18 +12,23 @@ def accept(server_socket):
 
 def read(client_socket):
     data = client_socket.recv(4096)
-    print(f'{data=}')
+    print(f"{data=}")
     client_socket.send(data.upper())
     if b"close" in data:
         client_socket.close()
         client_sockets_list.remove(client_socket)
 
 
-server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-server_socket.setblocking(False) # non-blocking
-server_socket.bind(("localhost", 9000))
-server_socket.listen()
+def create_server(address, port):
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    server_socket.setblocking(False)  # non-blocking
+    server_socket.bind((address, port))
+    server_socket.listen()
+    return server_socket
+
+
+server_socket = create_server("localhost", 9000)
 client_sockets_list = []
 
 

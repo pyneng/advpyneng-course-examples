@@ -11,7 +11,7 @@ def accept(server_socket):
 
 def read(client_socket):
     data = client_socket.recv(4096)
-    print(f'{data=}')
+    print(f"{data=}")
     if b"close" in data:
         selector.unregister(client_socket)
         client_socket.close()
@@ -19,19 +19,22 @@ def read(client_socket):
         client_socket.send(data.upper())
 
 
-server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-server_socket.bind(("localhost", 9000))
-server_socket.listen()
+def create_server(address, port):
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    server_socket.bind((address, port))
+    server_socket.listen()
+    return server_socket
 
+
+server_socket = create_server("localhost", 9000)
 selector = selectors.DefaultSelector()
-print(f"{selector=}")
 selector.register(server_socket, selectors.EVENT_READ)
 
 
 while True:
     print("Waiting for event...")
-    new_events = selector.select() # selector.select(timeout=3)
+    new_events = selector.select()  # selector.select(timeout=3)
     for event, _ in new_events:
         event_socket = event.fileobj
 
