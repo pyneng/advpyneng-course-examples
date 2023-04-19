@@ -13,6 +13,6 @@ def client(client_id):
     telnet.write(b"close\r\n")
 
 
-with ThreadPoolExecutor(10) as ex:
-    futures = [ex.submit(client, i) for i in range(1, 11)]
+with ThreadPoolExecutor(50) as ex:
+    futures = [ex.submit(client, i) for i in range(1, 51)]
     [f.result() for f in futures]
