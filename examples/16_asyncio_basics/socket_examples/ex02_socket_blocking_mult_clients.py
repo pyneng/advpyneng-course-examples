@@ -9,7 +9,7 @@ def create_server(address, port):
     return server_socket
 
 
-server_socket = create_server("localhost", 9000)
+server_socket = create_server("localhost", 8080)
 
 
 while True:
@@ -18,15 +18,15 @@ while True:
     print(f"{client_socket=}")
     print(f"{client_address=}")
 
-    client_data = b""
     while True:
-        if b"close" in client_data:
-            client_socket.close()
+        data = client_socket.recv(100)
+        print(f"{data=}")
+        client_socket.send(data.upper())
+        if b"close" in data:
             break
-        else:
-            data = client_socket.recv(4096)  # blocking
-            print(f"{data=}")
-            client_data += data
 
         client_socket.send(data.upper())
     print(f"client done {client_address=}")
+    client_socket.close()
+
+server_socket.close()

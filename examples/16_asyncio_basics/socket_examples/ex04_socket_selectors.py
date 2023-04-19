@@ -27,7 +27,7 @@ def create_server(address, port):
     return server_socket
 
 
-server_socket = create_server("localhost", 9000)
+server_socket = create_server("localhost", 8080)
 selector = selectors.DefaultSelector()
 selector.register(server_socket, selectors.EVENT_READ)
 

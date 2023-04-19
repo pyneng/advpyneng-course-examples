@@ -5,7 +5,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 
 def client(client_id):
-    telnet = telnetlib.Telnet("127.0.0.1", port=9000)
+    telnet = telnetlib.Telnet("127.0.0.1", port=8080)
     telnet.write(str(client_id).encode() + b"\r\n")
     time.sleep(random.random())
     print(f"{telnet.read_very_eager()=}")
