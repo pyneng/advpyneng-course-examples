@@ -12,21 +12,20 @@ def create_server(address, port):
 server_socket = create_server("localhost", 8080)
 
 
-while True:
-    print("Waiting accept...")
-    client_socket, client_address = server_socket.accept()
-    print(f"{client_socket=}")
-    print(f"{client_address=}")
-
+try:
     while True:
-        data = client_socket.recv(100)
-        print(f"{data=}")
-        client_socket.send(data.upper())
-        if b"close" in data:
-            break
+        print("Waiting accept...")
+        client_socket, client_address = server_socket.accept()
+        print(f"{client_socket=}")
+        print(f"{client_address=}")
 
-        client_socket.send(data.upper())
-    print(f"client done {client_address=}")
-    client_socket.close()
+        while True:
+            data = client_socket.recv(100)
+            print(f"{data=}")
+            client_socket.send(data.upper())
+            if b"close" in data:
+                break
 
-server_socket.close()
+        client_socket.close()
+finally:
+    server_socket.close()
