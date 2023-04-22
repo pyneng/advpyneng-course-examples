@@ -3,13 +3,13 @@ from pprint import pprint
 import random
 
 
-async def send_show(device_ip, show_command):
-    print(f">>> Start send_show {device_ip}")
-    await asyncio.sleep(random.choice([0, 1, 2]))
-    print(f"Send command {show_command}")
-    await asyncio.sleep(1)
-    print(f"<<< End  send_show  {device_ip}")
-    return f"{device_ip} {show_command}"
+async def send_show(device, show):
+    print(f"Start send_show {device=}")
+    await asyncio.sleep(random.random() * 3)
+    print(f"Send  command {show=} {device=}")
+    await asyncio.sleep(random.random() * 3)
+    print(f"End   send_show  {device=}")
+    return f"{device} {show}"
 
 
 async def get_show_from_devices(devices, command):
