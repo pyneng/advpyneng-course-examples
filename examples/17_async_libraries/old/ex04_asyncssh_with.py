@@ -7,7 +7,7 @@ import asyncssh
 
 async def connect_ssh(ip, command, username="cisco", password="cisco"):
     print(f"Подключаюсь к {ip}")
-    #if ip == "192.168.100.1": password = "cisco123"
+    #if ip == "192.168.139.1": password = "cisco123"
     async with asyncssh.connect(
         ip,
         username=username,
@@ -39,6 +39,6 @@ async def send_command_to_devices(ip_list, command):
 
 
 if __name__ == "__main__":
-    ip_list = ["192.168.100.1", "192.168.100.2", "192.168.100.3"]
+    ip_list = ["192.168.139.1", "192.168.139.2", "192.168.139.3"]
     result = asyncio.run(send_command_to_devices(ip_list, "sh clock"))
     pprint(result)

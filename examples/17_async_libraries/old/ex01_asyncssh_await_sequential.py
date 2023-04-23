@@ -16,9 +16,6 @@ async def connect_ssh(device, command):
     await reader.readuntil("#")
     writer.write("terminal length 0\n")
     await reader.readuntil("#")
-    sleep_sec = choice([4, 1, 5])
-    print(f"Посплю {sleep_sec} секунд")
-    await asyncio.sleep(sleep_sec)
     print(f'Отправляю команду {command} на {device["host"]}')
     writer.write(command + "\n")
     output = await reader.readuntil("#")
@@ -37,5 +34,6 @@ async def send_command_to_devices(devices, command):
 if __name__ == "__main__":
     with open("devices.yaml") as f:
         devices = yaml.safe_load(f)
-    results = asyncio.run(send_command_to_devices(devices, "sh ip int br"))
-    pprint(results, width=120)
+        pprint(devices)
+    #results = asyncio.run(send_command_to_devices(devices, "sh ip int br"))
+    #pprint(results, width=120)
