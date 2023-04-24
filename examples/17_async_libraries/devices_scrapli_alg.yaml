@@ -2,9 +2,9 @@
   auth_secondary: cisco
   auth_strict_key: false
   auth_username: cisco
-  host: 192.168.100.1
+  host: 192.168.139.1
   platform: cisco_iosxe
-  timeout_socket: 5
+  timeout_socket: 10
   timeout_transport: 10
   transport: asyncssh
   transport_options: &transport_alg
@@ -19,9 +19,9 @@
   auth_secondary: cisco
   auth_strict_key: false
   auth_username: cisco
-  host: 192.168.100.2
+  host: 192.168.139.2
   platform: cisco_iosxe
-  timeout_socket: 5
+  timeout_socket: 10
   timeout_transport: 10
   transport: asyncssh
   transport_options: *transport_alg
@@ -29,9 +29,9 @@
   auth_secondary: cisco
   auth_strict_key: false
   auth_username: cisco
-  host: 192.168.100.3
+  host: 192.168.139.3
   platform: cisco_iosxe
-  timeout_socket: 5
+  timeout_socket: 10
   timeout_transport: 10
   transport: asyncssh
   transport_options: *transport_alg
