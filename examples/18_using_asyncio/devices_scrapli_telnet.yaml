@@ -1,4 +1,4 @@
-- host: 192.168.100.1
+- host: 192.168.139.1
   auth_username: cisco
   auth_password: cisco
   auth_secondary: cisco
@@ -8,7 +8,7 @@
   platform: cisco_iosxe
   transport: asynctelnet
   port: 23
-- host: 192.168.100.2
+- host: 192.168.139.2
   auth_username: cisco
   auth_password: cisco
   auth_secondary: cisco
@@ -18,7 +18,7 @@
   platform: cisco_iosxe
   transport: asynctelnet
   port: 23
-- host: 192.168.100.3
+- host: 192.168.139.3
   auth_username: cisco
   auth_password: cisco
   auth_secondary: cisco
