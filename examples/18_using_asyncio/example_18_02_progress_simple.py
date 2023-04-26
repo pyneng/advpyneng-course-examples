@@ -5,19 +5,8 @@ from scrapli import AsyncScrapli
 from scrapli.exceptions import ScrapliException
 
 
-class ProgressBar:
-    def __init__(self, symbol="."):
-        self.symbol = symbol
-
-    async def __anext__(self):
-        return self.symbol
-
-    def __aiter__(self):
-        return self
-
-
-async def draw_progress():
-    async for sym in ProgressBar():
+async def draw_progress(sym="."):
+    while True:
         print(sym, end="", flush=True)
         await asyncio.sleep(0.5)
 

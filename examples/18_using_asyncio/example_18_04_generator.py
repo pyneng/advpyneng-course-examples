@@ -5,20 +5,14 @@ from scrapli import AsyncScrapli
 from scrapli.exceptions import ScrapliException
 
 
-class ProgressBar:
-    def __init__(self, symbol="."):
-        self.symbol = symbol
-
-    async def __anext__(self):
-        return self.symbol
-
-    def __aiter__(self):
-        return self
+async def progress_dots():
+    while True:
+        yield "."
 
 
-async def draw_progress():
-    async for sym in ProgressBar():
-        print(sym, end="", flush=True)
+async def draw_dots():
+    async for dot in progress_dots():
+        print(dot, end="", flush=True)
         await asyncio.sleep(0.5)
 
 
@@ -33,8 +27,9 @@ async def send_show(device, command):
 
 async def run_all(devices, command):
     coroutines = [send_show(dev, command) for dev in devices]
-    bar = asyncio.create_task(draw_progress())
+    dots = asyncio.create_task(draw_dots())
     results = await asyncio.gather(*coroutines, return_exceptions=True)
+    dots.cancel()
     return results
 
 
@@ -43,3 +38,4 @@ if __name__ == "__main__":
         devices = yaml.safe_load(f)
     output = asyncio.run(run_all(devices, "show ip int br"))
     print(output)
+

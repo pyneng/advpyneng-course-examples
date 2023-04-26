@@ -2,7 +2,7 @@ import asyncio
 import yaml
 from scrapli import AsyncScrapli
 from scrapli.exceptions import ScrapliException
-from devices_scrapli import devices as devices_ssh
+
 
 class CheckConnection:
     def __init__(self, device_list):
@@ -29,6 +29,7 @@ class CheckConnection:
     def __aiter__(self):
         return self
 
+
 async def scanner(devices, protocol):
     ssh_check = CheckConnection(devices)
     async for status, msg in ssh_check:
@@ -36,6 +37,8 @@ async def scanner(devices, protocol):
 
 
 async def main():
+    with open("devices_scrapli.yaml") as f:
+        devices_ssh = yaml.safe_load(f)
     with open("devices_scrapli_telnet.yaml") as f:
         devices_telnet = yaml.safe_load(f)
     scan_ssh = scanner(devices_ssh, "SSH")
