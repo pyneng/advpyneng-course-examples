@@ -8,28 +8,29 @@ from scrapli.exceptions import ScrapliException
 
 
 def verbose(func):
+    print(f"verbose {func=}")
+
     if inspect.iscoroutinefunction(func):
         @wraps(func)
-        async def inner(*args, verbose=False, **kwargs):
-            if verbose:
-                print(f"{args=}")
-                print(f"{kwargs=}")
+        async def inner(*args, **kwargs):
+            print(f"inner {args=} {kwargs=}")
             result = await func(*args, **kwargs)
+            print(f"inner {result=}")
             return result
+
         return inner
     else:
         @wraps(func)
-        def inner(*args, verbose=False, **kwargs):
-            if verbose:
-                print(f"{args=}")
-                print(f"{kwargs=}")
+        def inner(*args, **kwargs):
+            print(f"inner {args=} {kwargs=}")
             result = func(*args, **kwargs)
+            print(f"inner {result=}")
             return result
+
         return inner
 
-# send_show = verbose(send_show)
 
-@verbose
+@verbose # send_show = verbose(send_show)
 async def send_show(device, command):
     try:
         async with AsyncScrapli(**device) as ssh:
@@ -46,7 +47,7 @@ async def run_all(devices, command):
 
 
 if __name__ == "__main__":
-    with open("devices_scrapli.yaml") as f:
+    with open("devices_scrapli_telnet.yaml") as f:
         devices = yaml.safe_load(f)
-    output = asyncio.run(run_all(devices, "show ip int br"))
-    print(output)
+    output = asyncio.run(run_all(devices, "show clock"))
+    pprint(output)
