@@ -35,11 +35,18 @@ class CiscoAsyncSSH:
 
     async def read_stream(self, command):
         self._writer.write(f"{command}\n")
+        async for line in self._reader:
+            print(f"{self.host=} {line=}")
+            if line.startswith("end"):
+                break
+
+    async def read_stream2(self, command):
+        self._writer.write(f"{command}\n")
         read = aiter(self._reader)
+
         while True:
             try:
                 line = await asyncio.wait_for(anext(read), timeout=10)
-                print(f"{line=}")
             except asyncio.TimeoutError:
                 print("TIMEOUT")
                 break
@@ -77,5 +84,5 @@ if __name__ == "__main__":
     params = {"username": "cisco", "password": "cisco", "enable_password": "cisco"}
     hosts = ["192.168.139.1", "192.168.139.2", "192.168.139.3"]
     devices = [{"host": ip, **params} for ip in hosts]
-    pprint(asyncio.run(send_command_to_devices(devices, "sh ip int br")))
+    pprint(asyncio.run(send_command_to_devices(devices, "sh run | i interface|end")))
 
