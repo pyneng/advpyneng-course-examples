@@ -33,27 +33,6 @@ class CiscoAsyncSSH:
         output = await asyncio.wait_for(self._reader.readuntil(prompt), timeout=timeout)
         return output
 
-    async def read_stream(self, command):
-        self._writer.write(f"{command}\n")
-        async for line in self._reader:
-            print(f"{self.host=} {line=}")
-            if line.startswith("end"):
-                break
-
-    async def read_stream2(self, command):
-        self._writer.write(f"{command}\n")
-        read = aiter(self._reader)
-
-        while True:
-            try:
-                line = await asyncio.wait_for(anext(read), timeout=10)
-            except asyncio.TimeoutError:
-                print("TIMEOUT")
-                break
-            except StopAsyncIteration:
-                print("StopAsyncIteration")
-                break
-
     async def send_show_command(self, command):
         self._writer.write(f"{command}\n")
         output = await self._readuntil("#")
@@ -65,6 +44,27 @@ class CiscoAsyncSSH:
 
     async def __aexit__(self, exc_type, exc_val, exc_tb):
         self._ssh.close()
+
+    async def read_stream(self, command):
+        self._writer.write(f"{command}\n")
+        async for line in self._reader:
+            print(f"{self.host=} {line=}")
+            if line.startswith("end"):
+                break
+
+    async def read_stream(self, command):
+        self._writer.write(f"{command}\n")
+        reader = aiter(self._reader)
+        while True:
+            try:
+                line = await asyncio.wait_for(anext(reader), timeout=10)
+            except asyncio.TimeoutError:
+                break
+            except StopAsyncIteration:
+                break
+            else:
+                print(f"{self.host=} {line=}")
+
 
 
 async def send_show(device, show):
