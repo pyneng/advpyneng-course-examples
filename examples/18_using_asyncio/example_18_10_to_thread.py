@@ -21,16 +21,17 @@ async def scrapli_connect(device):
 
 
 async def main():
-    devices = range(10)
+    devices = range(100)
     coroutines = []
     for dev in devices:
         if is_odd(dev):
-            coro = asyncio.to_thread(netmiko_connect, dev)
+            c = asyncio.to_thread(netmiko_connect, dev)
         else:
-            coro = scrapli_connect(dev)
-        coroutines.append(coro)
+            c = scrapli_connect(dev)
+        coroutines.append(c)
     results = await asyncio.gather(*coroutines)
     return results
+
 
 
 if __name__ == "__main__":
