@@ -2,8 +2,9 @@ import asyncio
 
 
 async def ping(ip):
+    cmd = f"ping -c 3 -n {ip}".split()
     proc = await asyncio.create_subprocess_exec(
-        *f"ping -c 3 -n {ip}".split(),
+        *cmd,
         stdout=asyncio.subprocess.PIPE,
         stderr=asyncio.subprocess.PIPE,
         # encoding="utf-8",
