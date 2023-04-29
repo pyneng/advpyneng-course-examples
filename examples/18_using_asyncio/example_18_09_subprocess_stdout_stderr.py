@@ -9,12 +9,11 @@ async def ping(ip):
         stderr=asyncio.subprocess.PIPE,
         # encoding="utf-8",
     )
-
-    # stdout, stderr = await proc.communicate()
-    await proc.wait()
-
-    ip_is_reachable = proc.returncode == 0
-    return ip_is_reachable
+    stdout, stderr = await proc.communicate()
+    if " 0% packet loss" in stdout.decode():
+        return True
+    else:
+        return False
 
 
 async def ping_ip_list(ip_list):
@@ -24,6 +23,6 @@ async def ping_ip_list(ip_list):
 
 
 if __name__ == "__main__":
-    ip_list = ["192.168.100.1", "192.168.100.2", "8.8.8.8"]
+    ip_list = ["192.168.139.1", "192.168.100.2", "8.8.8.8"]
     results = asyncio.run(ping_ip_list(ip_list))
     print(results)
