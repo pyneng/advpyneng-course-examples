@@ -1,24 +1,22 @@
 import asyncio
-from rich import inspect
 
 
-async def ping(ip):
-    cmd = f"ping -c 3 -n {ip}".split()
+async def ping_ip(ip):
+    # cmd = f"ping -c 3 -n {ip}".split()
     proc = await asyncio.create_subprocess_exec(
-        *cmd,
+        "ping", "-c", "3", "-n", ip,
+        # *cmd
         stdout=asyncio.subprocess.DEVNULL,
         stderr=asyncio.subprocess.DEVNULL,
-        # encoding="utf-8",
     )
     returncode = await proc.wait()
-    ip_is_reachable = returncode == 0
-    return ip_is_reachable
+    return returncode == 0
 
 
 async def ping_ip_list(ip_list):
-    coroutines = [ping(ip) for ip in ip_list]
-    result = await asyncio.gather(*coroutines)
-    return result
+    coroutines = [ping_ip(ip) for ip in ip_list]
+    results = await asyncio.gather(*coroutines)
+    return results
 
 
 if __name__ == "__main__":
