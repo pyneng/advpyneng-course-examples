@@ -5,23 +5,19 @@ from functools import wraps
 import yaml
 
 
-def create_semaphore(semaphore):
-    def s_decorator(func):
-        @wraps(func)
-        async def inner(*args, **kwargs):
-            async with semaphore:
-                return await func(*args, **kwargs)
+async def limited_gather(*coroutines, limit, return_exceptions=False):
+    semaphore = asyncio.Semaphore(limit)
 
-        return inner
+    async def limited_run(coro):
+        async with semaphore:
+            return await coro
 
-    return s_decorator
-
-
-limit1 = create_semaphore(asyncio.Semaphore(5))
-limit2 = create_semaphore(asyncio.Semaphore(5))
+    return await asyncio.gather(
+        *(limited_run(coro) for coro in coroutines),
+        return_exceptions=return_exceptions,
+    )
 
 
-@limit1
 async def send_show(device, command):
     host = device
     print(f">>> Connect {host}")
@@ -30,7 +26,6 @@ async def send_show(device, command):
     return f"SHOW {host=} {command=}"
 
 
-@limit2
 async def send_cfg(device, command):
     host = device
     print(f">>> Connect CFG {host}")
@@ -43,7 +38,7 @@ async def run_all(devices, show, cfg):
     coroutines1 = [send_show(dev, show) for dev in devices]
     coroutines2 = [send_cfg(dev, cfg) for dev in devices]
     coros = coroutines1 + coroutines2
-    results = await asyncio.gather(*coros, return_exceptions=True)
+    results = await limited_gather(*coros, limit=5, return_exceptions=True)
     return results
 
 

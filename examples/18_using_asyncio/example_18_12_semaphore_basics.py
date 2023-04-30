@@ -1,26 +1,18 @@
 import asyncio
+import random
 
 
-async def connect(ip, semaphore):
-    print("Жду токен")
-    await semaphore.acquire()
-    print(f"Подключаюсь к {ip}")
-    await asyncio.sleep(1)
-    print(f"Ответ от {ip}")
-    semaphore.release()
-
-
-async def connect(ip, semaphore):
-    print("Жду токена от семафора")
+async def send_show(device, command, semaphore):
+    print("^^^ Waiting")
     async with semaphore:
-        print(f"Подключаюсь к {ip}")
-        await asyncio.sleep(1)
-        print(f"Ответ от {ip}")
+        print(f">>> Connect {device}")
+        await asyncio.sleep(random.random() * 3)
+        print(f"<<< Done    {device}")
 
 
 async def main():
-    sem = asyncio.Semaphore(20)
-    coroutines = [connect(i, sem) for i in range(100)]
+    s = asyncio.Semaphore(10)
+    coroutines = [send_show(i, "sh clock", s) for i in range(50)]
     await asyncio.gather(*coroutines)
 
 

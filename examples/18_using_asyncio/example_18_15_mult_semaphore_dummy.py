@@ -1,37 +1,40 @@
-from pprint import pprint
 import asyncio
-from itertools import repeat
-
+import random
+from pprint import pprint
+from functools import wraps
 import yaml
-import netdev
 
 
-async def connect_ssh(device, command, semaphore):
+async def limited_run(semaphore, coro):
     async with semaphore:
-        print(f'Подключаюсь к {device["host"]}')
-        async with netdev.create(**device) as ssh:
-            output = await ssh.send_command(command)
-        print(f'Получен результат от {device["host"]}')
-        return output
+        return await coro
 
 
-async def func(semaphore):
-    async with semaphore:
-        print('>>>')
-        await asyncio.sleep(0.5)
-        print('<<<')
+async def send_show(device, command):
+    print(f">>> Connect SHOW {device}")
+    await asyncio.sleep(random.random())
+    print(f"<<< Done    SHOW {device}")
+    return f"SHOW {device=} {command=}"
 
-async def send_command_to_devices(devices, command, max_workers=1):
-    sem = asyncio.Semaphore(5)
-    coroutines = [connect_ssh(device, command, sem) for device in devices]
-    sem2 = asyncio.Semaphore(5)
-    coroutines2 = [func(sem2) for _ in range(10)]
-    result = await asyncio.gather(*coroutines+coroutines2)
-    return result
+
+async def send_cfg(device, command):
+    print(f">>> Connect CFG {device}")
+    await asyncio.sleep(random.random() * 2)
+    print(f"<<< Done    CFG {device}")
+    return f"CFG {device=} {command=}"
+
+
+async def run_all(devices, show, cfg, limit=8):
+    semaphore1 = asyncio.Semaphore(limit)
+    semaphore2 = asyncio.Semaphore(limit)
+    # coros = [send_show(dev, show) for dev in devices]
+    coros1 = [limited_run(semaphore1, send_show(dev, show)) for dev in devices]
+    coros2 = [limited_run(semaphore2, send_cfg(dev, cfg)) for dev in devices]
+    results = await asyncio.gather(*coros1, *coros2, return_exceptions=True)
+    return results
 
 
 if __name__ == "__main__":
-    with open("devices_netmiko.yaml") as f:
-        devices = yaml.safe_load(f)
-    result = asyncio.run(send_command_to_devices(devices, "sh run", max_workers=10))
-
+    devices = range(10)
+    output = asyncio.run(run_all(devices, "show ip int br", "alias exec c conf t"))
+    pprint(output)

@@ -17,9 +17,9 @@ async def send_show(device, command, semaphore):
         print(error)
 
 
-async def run_all(devices, command):
-    sem = asyncio.Semaphore(2)
-    coroutines = [send_show(dev, command, sem) for dev in devices]
+async def run_all(devices, command, limit=2):
+    semaphore = asyncio.Semaphore(limit)
+    coroutines = [send_show(dev, command, semaphore) for dev in devices]
     results = await asyncio.gather(*coroutines, return_exceptions=True)
     return results
 
@@ -27,6 +27,6 @@ async def run_all(devices, command):
 if __name__ == "__main__":
     with open("devices_scrapli_telnet.yaml") as f:
         devices = yaml.safe_load(f)
-    output = asyncio.run(run_all(devices, "show ip int br"))
-    print(output)
+    output = asyncio.run(run_all(devices, "show clock"))
+    pprint(output)
 
