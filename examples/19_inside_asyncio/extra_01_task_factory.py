@@ -16,10 +16,10 @@ async def delay_msg(delay, msg):
 
 
 async def main():
-    print(f">>> START {time()}")
+    print(f">>> START MAIN {time()}")
     # res1 = await delay_msg(3, "task1")
     res1 = await asyncio.create_task(delay_msg(3, "task1"))
-    print(f">>> STOP  {time()}")
+    print(f">>> STOP  MAIN {time()}")
 
 
 class CustomTask(_PyTask):
@@ -29,9 +29,9 @@ class CustomTask(_PyTask):
 
     def _Task__step(self, exc=None):
         self._total_step += 1
-        secho(f"==> STEP{self._total_step} {self}", fg="green")
+        secho(f"==> STEP{self._total_step} {self.get_name().upper()} {self}", fg="green")
         super()._Task__step(exc=exc)
-        secho(f"<== STEP{self._total_step} {self}", fg="green")
+        secho(f"<== STEP{self._total_step} {self.get_name().upper()} {self}", fg="green")
 
     def __repr__(self):
         orig_repr = super().__repr__()
