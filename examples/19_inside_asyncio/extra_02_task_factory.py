@@ -9,9 +9,9 @@ def verbose(func):
     @wraps(func)
     def inner(*args, **kwargs):
         self = args[0]
-        print(f">>> VERBOSE {func.__qualname__:30} args={args[1:]} {self}")
+        print(f">>> VERBOSE {func.__qualname__:30} args={args[1:]}")
         result = func(*args, **kwargs)
-        print(f"<<< VERBOSE {func.__qualname__:30} {result=} {self}")
+        print(f"<<< VERBOSE {func.__qualname__:30} {result=}")
         return result
 
     return inner
