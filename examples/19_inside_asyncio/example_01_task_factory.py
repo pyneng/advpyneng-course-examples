@@ -4,13 +4,14 @@ from datetime import datetime
 from asyncio.tasks import _PyTask
 from functools import wraps
 from rich import print as rprint
+from extra_01_decorator_verbose_methods_filter import verbose_methods_filter
 
 
-def verbose(func):
+def verbose_task(func):
     @wraps(func)
     def inner(*args, **kwargs):
         self = args[0]
-        # rprint(f"[violet]Calling {self.get_name()} {func.__qualname__}")
+        rprint(f"[violet]Calling {self.get_name()} {func.__qualname__}")
         # rprint(f"[violet]Calling {func.__qualname__} {self.get_name()}\n{self}[/violet]")
         # print(f"Calling {func.__qualname__:30} args={args[1:]}")
         result = func(*args, **kwargs)
@@ -20,33 +21,10 @@ def verbose(func):
     return inner
 
 
-def verbose_methods_filter(include=None, ignore=None):
-    if ignore is None:
-        ignore = set()
-    if include is None:
-        include = set()
-
-    def verbose_methods(cls):
-        all_attrs = set(dir(cls))
-        if include:
-            all_attrs = include
-        elif ignore:
-            all_attrs -= ignore
-        methods = {}
-        for name in all_attrs:
-            method = getattr(cls, name)
-            # if callable(method) and not re.search(r"__\S+__", name):
-            if callable(method):
-                methods[name] = method
-        for name, method in methods.items():
-            setattr(cls, name, verbose(method))
-        return cls
-
-    return verbose_methods
-
-
 # verbose_methods = verbose_methods_filter()
-verbose_methods = verbose_methods_filter(include=["_Task__step", "_Task__wakeup"])
+verbose_methods = verbose_methods_filter(
+    include=["_Task__step", "_Task__wakeup"], verbose=verbose_task
+)
 
 
 async def hello():
