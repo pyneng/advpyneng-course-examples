@@ -10,7 +10,8 @@ def verbose(func):
     @wraps(func)
     def inner(*args, **kwargs):
         self = args[0]
-        rprint(f"[violet]Calling {func.__qualname__}\n{self}[/violet]")
+        # rprint(f"[violet]Calling {self.get_name()} {func.__qualname__}")
+        # rprint(f"[violet]Calling {func.__qualname__} {self.get_name()}\n{self}[/violet]")
         # print(f"Calling {func.__qualname__:30} args={args[1:]}")
         result = func(*args, **kwargs)
         # print(f"Calling {func.__qualname__:30} {result=}")
@@ -34,7 +35,8 @@ def verbose_methods_filter(include=None, ignore=None):
         methods = {}
         for name in all_attrs:
             method = getattr(cls, name)
-            if callable(method) and not re.search(r"__\S+__", name):
+            # if callable(method) and not re.search(r"__\S+__", name):
+            if callable(method):
                 methods[name] = method
         for name, method in methods.items():
             setattr(cls, name, verbose(method))
@@ -47,22 +49,28 @@ def verbose_methods_filter(include=None, ignore=None):
 verbose_methods = verbose_methods_filter(include=["_Task__step", "_Task__wakeup"])
 
 
-async def delay_msg(delay, msg):
-    print(f"START delay_msg {msg=}")
-    await asyncio.sleep(delay)
-    print(f"STOP  delay_msg {msg=}")
-    return msg
+async def hello():
+    print("start hello")
+    await asyncio.sleep(1)
+    print("stop  hello")
 
 
 async def main():
     print(f">>> START   MAIN")
-    # res = await delay_msg(3, "task1")
-    await asyncio.sleep(3)
+    new_task = asyncio.create_task(hello())
+    await new_task
+    # await hello()
     print(f"<<< STOP    MAIN")
 
 
+@verbose_methods
+class CustomTask(_PyTask):
+    def __init__(self, coro, *, loop=None, name=None):
+        super().__init__(coro, loop=loop, name=name)
+        rprint(f"[violet]Creating task {self}")
+
+
 def task_factory(loop, coro):
-    CustomTask = verbose_methods(_PyTask)
     return CustomTask(coro, loop=loop)
 
 
