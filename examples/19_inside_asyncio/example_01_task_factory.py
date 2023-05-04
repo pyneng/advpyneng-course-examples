@@ -4,14 +4,14 @@ from datetime import datetime
 from asyncio.tasks import _PyTask
 from functools import wraps
 from rich import print as rprint
-from extra_01_decorator_verbose_methods_filter import verbose_methods_filter
+from extra_01_decorator_verbose_methods_filter import verbose_methods_filter, time
 
 
 def verbose_task(func):
     @wraps(func)
     def inner(*args, **kwargs):
         self = args[0]
-        rprint(f"[violet]Calling {self.get_name()} {func.__qualname__}")
+        rprint(f"[violet]{time()} Calling {self.get_name()} {func.__qualname__}")
         # rprint(f"[violet]Calling {func.__qualname__} {self.get_name()}\n{self}[/violet]")
         # print(f"Calling {func.__qualname__:30} args={args[1:]}")
         result = func(*args, **kwargs)
@@ -45,7 +45,7 @@ async def main():
 class CustomTask(_PyTask):
     def __init__(self, coro, *, loop=None, name=None):
         super().__init__(coro, loop=loop, name=name)
-        rprint(f"[violet]Creating task {self}")
+        rprint(f"[violet]{time()} Creating task {self}")
 
 
 def task_factory(loop, coro):
