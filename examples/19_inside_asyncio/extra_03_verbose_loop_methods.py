@@ -27,14 +27,20 @@ def verbose_loop(func):
     @wraps(func)
     def inner(*args, **kwargs):
         self = args[0]
-        rprint(f"[green]{time()} Loop {func.__qualname__}")
+        rprint(f"[green]{'>' * 40}")
+        rprint(f"[green]{time()} Loop start {func.__qualname__}")
         # rprint(f"[green]Loop {func.__qualname__} args={args[1:]}")
+        if len(self._scheduled):
+            rprint(f"[green]    {self._scheduled=}")
+        if len(self._ready):
+            rprint(f"[green]    {self._ready=}")
+        result = func(*args, **kwargs)
+        # rprint(f"[green]{time()} Loop stop {func.__qualname__}")
         # if len(self._scheduled):
         #     rprint(f"[green]    {self._scheduled=}")
         # if len(self._ready):
         #     rprint(f"[green]    {self._ready=}")
-        result = func(*args, **kwargs)
-        # print(f"<<< VERBOSE {func.__qualname__:30} {result=}")
+        rprint(f"[green]{'<' * 40}\n")
         return result
 
     return inner
