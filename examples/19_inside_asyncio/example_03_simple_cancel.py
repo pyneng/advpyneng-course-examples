@@ -1,6 +1,7 @@
 import asyncio
 import yaml
 from pprint import pprint
+from extra_02_verbose_task_methods import task_factory
 from scrapli import AsyncScrapli
 from scrapli.exceptions import ScrapliException
 
@@ -12,6 +13,7 @@ async def draw_dots(sym="."):
             await asyncio.sleep(0.5)
     except asyncio.CancelledError:
         print("\n")
+        await asyncio.sleep(2)
         raise
 
 
@@ -29,11 +31,18 @@ async def run_all(devices, command):
     dots = asyncio.create_task(draw_dots())
     results = await asyncio.gather(*coroutines, return_exceptions=True)
     dots.cancel()
+    try:
+        await dots
+    except asyncio.CancelledError:
+        pass
     return results
 
 
 if __name__ == "__main__":
     with open("devices_scrapli.yaml") as f:
         devices = yaml.safe_load(f)
-    output = asyncio.run(run_all(devices, "show ip int br"))
+    # output = asyncio.run(run_all(devices, "show ip int br"))
+    loop = asyncio.new_event_loop()
+    output = loop.run_until_complete(run_all(devices, "show ip int br"))
+    loop.close()
     print(output)
