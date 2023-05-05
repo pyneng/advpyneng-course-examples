@@ -5,24 +5,14 @@ from scrapli import AsyncScrapli
 from scrapli.exceptions import ScrapliException
 
 
-class ProgressDots:
-    def __init__(self, dot="."):
-        self.dot = dot
-
-    async def __anext__(self):
-        return self.dot
-
-    def __aiter__(self):
-        return self
-
-
-async def draw_dots():
+async def draw_dots(sym="."):
     try:
-        async for dot in ProgressDots():
-            print(dot, end="", flush=True)
+        while True:
+            print(sym, end="", flush=True)
             await asyncio.sleep(0.5)
     except asyncio.CancelledError:
-        print()
+        print("\n")
+        raise
 
 
 async def send_show(device, command):
