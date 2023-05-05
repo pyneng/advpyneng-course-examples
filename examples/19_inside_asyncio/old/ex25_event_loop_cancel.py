@@ -29,8 +29,7 @@ async def run_all(devices, command):
 
 
 async def cancel_tasks():
-    tasks = [task for task in asyncio.all_tasks()
-             if task is not asyncio.current_task()]
+    tasks = [task for task in asyncio.all_tasks() if task is not asyncio.current_task()]
     [task.cancel() for task in tasks]
     pprint(tasks)
     output = await asyncio.gather(*tasks, return_exceptions=True)
@@ -38,8 +37,8 @@ async def cancel_tasks():
 
 
 if __name__ == "__main__":
-    #output = asyncio.run(run_all(devices, "sh clock"))
-    #pprint(output)
+    # output = asyncio.run(run_all(devices, "sh clock"))
+    # pprint(output)
     loop = asyncio.new_event_loop()
     try:
         output = loop.run_until_complete(run_all(devices, "sh clock"))

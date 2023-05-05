@@ -33,8 +33,8 @@ async def run_all(devices, command):
 
 async def main():
     task = asyncio.create_task(run_all(devices, "sh clock"))
-    #await asyncio.sleep(1)
-    #task.cancel()
+    # await asyncio.sleep(1)
+    # task.cancel()
     await asyncio.wait_for(task, timeout=1)
 
 

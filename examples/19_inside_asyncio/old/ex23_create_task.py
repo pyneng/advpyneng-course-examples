@@ -24,8 +24,8 @@ async def run_all(devices, command):
 
 
 if __name__ == "__main__":
-    #output = asyncio.run(run_all(devices, "sh clock"))
-    #pprint(output)
+    # output = asyncio.run(run_all(devices, "sh clock"))
+    # pprint(output)
     coro = run_all(devices, "sh clock")
     loop = asyncio.new_event_loop()
     task1 = loop.create_task(coro)

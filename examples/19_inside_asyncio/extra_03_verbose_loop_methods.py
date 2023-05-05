@@ -41,9 +41,7 @@ def verbose_loop(func):
 
 
 # verbose_methods = verbose_methods_filter(ignore=ignore_methods, verbose=verbose_loop)
-verbose_methods = verbose_methods_filter(
-    include=["_run_once"], verbose=verbose_loop
-)
+verbose_methods = verbose_methods_filter(include=["_run_once"], verbose=verbose_loop)
 
 
 @verbose_methods

@@ -44,4 +44,3 @@ class CustomTask(_PyTask):
 
 def task_factory(loop, coro):
     return CustomTask(coro, loop=loop)
-

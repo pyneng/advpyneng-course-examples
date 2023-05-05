@@ -24,18 +24,17 @@ async def send_show(device, command):
 
 
 async def run_all(devices, command):
-    tasks = [
-        asyncio.create_task(send_show(dev, command)) for dev in devices
-    ]
+    tasks = [asyncio.create_task(send_show(dev, command)) for dev in devices]
     done_set, pending_set = await asyncio.wait(
         tasks, timeout=5, return_when=asyncio.ALL_COMPLETED
     )
     print(f"{done_set=}")
     print(f"{pending_set=}")
     [t.cancel() for t in pending_set]
-    #results = [await t for t in done_set]
+    # results = [await t for t in done_set]
     results = [await t for t in tasks if t not in pending_set]
     return results
+
 
 if __name__ == "__main__":
     print(asyncio.run(run_all(devices, "sh clock")))

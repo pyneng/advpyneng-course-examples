@@ -47,4 +47,3 @@ if __name__ == "__main__":
         devices = yaml.safe_load(f)
     output = asyncio.run(run_all(devices, "show ip int br"))
     print(output)
-

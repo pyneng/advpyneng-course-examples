@@ -23,8 +23,8 @@ async def run_all(devices, command):
 
 
 if __name__ == "__main__":
-    #output = asyncio.run(run_all(devices, "sh clock"))
-    #pprint(output)
+    # output = asyncio.run(run_all(devices, "sh clock"))
+    # pprint(output)
     loop = asyncio.new_event_loop()
     output = loop.run_until_complete(run_all(devices, "sh clock"))
     pprint(output)

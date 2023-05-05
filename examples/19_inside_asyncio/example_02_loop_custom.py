@@ -6,7 +6,7 @@ from extra_03_verbose_loop_methods import EventLoopPolicy
 
 async def dummy():
     print(f"dummy start")
-    await asyncio.sleep(5)
+    await asyncio.sleep(1)
     # task = asyncio.create_task(asyncio.sleep(1))
     # await task
     print(f"dummy stop")

@@ -39,9 +39,7 @@ async def main():
         await asyncio.wait_for(asyncio.shield(task), timeout=1)
     except asyncio.TimeoutError as error:
         print(f"{error=}")
-    answer = input(
-        "Задача выполняется слишком долго. Продолжать выполнение? "
-    )
+    answer = input("Задача выполняется слишком долго. Продолжать выполнение? ")
     if answer == "y":
         await task
     else:
