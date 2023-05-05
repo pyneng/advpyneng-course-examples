@@ -80,14 +80,3 @@ if __name__ == "__main__":
     loop.set_task_factory(task_factory)
     task1 = loop.run_until_complete(dummy())
     loop.close()
-
-
-# Loop BaseEventLoop.run_until_complete
-# Loop BaseEventLoop.create_task
-# Loop BaseEventLoop.call_soon
-# Loop BaseEventLoop.run_forever
-# Loop CustomLoop._run_once
-# Loop BaseSelectorEventLoop._process_events
-# Loop BaseEventLoop.create_future
-# Loop BaseEventLoop.call_later
-# Loop BaseEventLoop.call_at
