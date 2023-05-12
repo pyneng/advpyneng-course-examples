@@ -28,7 +28,7 @@ async def run_all(devices, command):
     return result
 
 
-async def cancel_tasks():
+async def cancel_all_tasks():
     tasks = [task for task in asyncio.all_tasks() if task is not asyncio.current_task()]
     [task.cancel() for task in tasks]
     pprint(tasks)
@@ -44,6 +44,6 @@ if __name__ == "__main__":
         output = loop.run_until_complete(run_all(devices, "sh clock"))
         pprint(output)
     except KeyboardInterrupt:
-        loop.run_until_complete(cancel_tasks())
+        loop.run_until_complete(cancel_all_tasks())
     finally:
         loop.close()
